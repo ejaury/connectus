@@ -14,5 +14,6 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^$', 'connectus.courses.views.index'),
+    (r'^(?P<course_id>\d+)/grades/$', 'connectus.courses.views.grades'),
     # (r'^admin/', include(admin.site.urls)),
 )

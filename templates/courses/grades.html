@@ -1,0 +1,25 @@
+<h2>Class: {{ course_title }}</h2>
+
+{% if all_grades %}
+  <table border="1">
+    <tr>
+      <th>Student Name</th>
+      <th>Gradeable</th>
+      <th>Score</th>
+      <th>Comments</th>
+    </tr>
+    {% for grade in all_grades %}
+    <tr>
+      <td>{{ grade.student }}</td>
+      <td>{{ grade.gradeable }}</td>
+      <td>{{ grade.score }}</td>
+      {% if grade.comment %}
+      <td>{{ grade.comment }}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+    <p>No grades are available.</p>
+{% endif %}
+
