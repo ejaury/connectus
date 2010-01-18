@@ -1,0 +1,21 @@
+{% if all_courses %}
+  <table border="1">
+    <tr>
+      <th>Course Title</th>
+      <th>Description</th>
+      <th>Term</th>
+      <th>Year</th>
+    </tr>
+    {% for course in all_courses %}
+    <tr>
+      <td>{{ course.title }}</td>
+      <td>{{ course.description }}</td>
+      <td>{{ course.term }}</td>
+      <td>{{ course.year }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% else %}
+    <p>No courses are available.</p>
+{% endif %}
+

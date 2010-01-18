@@ -1,0 +1,8 @@
+<h1>{{ grade.student }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<strong>Class: </strong>{{ grade.course }}<br/>
+<strong>Gradeable: </strong>{{ grade.gradeable }}<br/>
+<strong>Score: </strong>{{ grade.score }}<br/>
+<strong>Comment: </strong>{{ grade.comment }}
