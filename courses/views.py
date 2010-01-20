@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render_to_response
 from connectus.courses.models import Course
+from connectus.grades.models import GradeForm
 
 def index(req):
   all_courses = Course.objects.all().order_by('-id')

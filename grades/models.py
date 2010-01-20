@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import ModelForm
 from connectus.courses.models import Course
 
 # Create your models here.
@@ -12,6 +13,10 @@ class Grade(models.Model):
 
   def __unicode__(self):
     return self.gradeable
+
+class GradeForm(ModelForm):
+  class Meta:
+    model = Grade
 
 """
 class Gradeable(models.Model):
