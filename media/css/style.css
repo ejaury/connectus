@@ -1,0 +1,121 @@
+html, body {
+  /* reset default margins and paddings in browsers */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: white url('images/body-bg.gif') repeat-x top left;
+  font-family: "Myriad Pro", Helvetica, Verdana, Arial, Sans-serif;
+  font-size: medium;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+table.course {
+  margin 0 auto;
+  width: 100%;
+  clear: both;
+}
+
+table.course thead th {
+  
+}
+
+.hidden {
+  display: none;
+}
+
+#page-container {
+  background: white;
+  /* center this div */
+  margin: auto;
+  width: 960px;
+}
+
+#header {
+  background: black
+              url(images/header_bg.png);
+  height: 150px;
+  color: white;
+}
+
+#mid-wrapper {
+  background: #333333;
+} 
+
+#sidebar {
+  background: #333333;
+  color: white;
+  float: left;
+  width: 220px;
+}
+
+#content-wrapper {
+  background: #FFFFEE;
+  margin-left: 220px;
+}
+
+#content-nav {
+  color: red;
+  border-bottom: 2px solid #eeeeee;
+  line-height: 30px;
+  margin: 0 10px 0;
+}
+
+#content {
+  color: black; 
+}
+
+#footer {
+  background: #666666;
+  border-top: 1px solid lightgray;
+  clear: both;
+  font-size: small;
+  color: lightgray;
+  padding: 10px 0 0 10px;
+  line-height: 18px;
+} 
+
+#header .logo {
+  float: right;
+  margin-top: 40px;
+}
+
+#content h2 {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 15px;
+}
+
+#content p {
+  margin: 0;
+  padding: 0;
+  padding-bottom: 15px;
+}
+
+#content .padding {
+  line-height: 18px;
+  padding: 10px;
+}
+
+#content-nav .padding {
+  padding-left: 10px;
+}
+
+#sidebar .padding {
+  line-height: 18px;
+  padding: 10px;
+}
+
+#footer a {
+  color: white;
+  text-decoration: none;
+}
+
+#footer a:hover {
+  color: lightblue;
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<title>
+    {% block title %}Connectus{% endblock %}
+  </title>
+	<meta http-equiv="Content-Language" content="en-us" />
+	
+	<meta http-equiv="imagetoolbar" content="no" />
+	<meta name="MSSmartTagsPreventParsing" content="true" />
+	
+	<meta name="description" content="Description" />
+	<meta name="keywords" content="Keywords" />
+	
+	<meta name="author" content="Aegis" />
+	
+  <style type="text/css" title="currentStyle">
+    @import url("/site_media/css/style.css");
+    @import url("/site_media/css/data_table.css");
+  </style>
+
+  <script type="text/javascript" src="/site_media/js/jquery.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery.dataTables.js"></script>
+
+  {% block head %}
+  {% endblock %}
+</head>
+
+<body>
+  <div id="static-nav"></div>
+  <div id="page-container">
+    <div id="header">
+      <img class="logo" alt="Connectus" src="/site_media/css/images/connectus_logo.png"></img>
+    </div>
+    <div id="mid-wrapper">
+      <div id="sidebar">
+        <div class="padding">
+          <dl>
+            <dt id="classes">Classes</dt>
+            <dt id="calendar">Calendar</dt>
+          </dl>
+        </div>
+      </div>
+      <div id="content-wrapper">
+        {% block content-nav %}
+        {% endblock %}
+        <div id="content">
+          <div class="padding">
+            {% block content %}
+              <h1>TESTING</h1>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer">Copyright Connectus 2010</div>
+  </div>
+</body>
+</html>

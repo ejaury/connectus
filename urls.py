@@ -13,7 +13,12 @@ urlpatterns = patterns('',
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
+    (r'^$', 'connectus.main.views.index'),
     (r'^courses/', include('connectus.courses.urls')),
     (r'^grades/', include('connectus.grades.urls')),
     (r'^admin/', include(admin.site.urls)),
+    # TODO: this conf is for production only
+    (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {
+      'document_root': '/home/edwin/connectus/media/', 'show_indexes': True
+    }),
 )

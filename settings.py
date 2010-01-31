@@ -9,7 +9,10 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASE_ENGINE = 'sqlite3'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_ENGINE = 'mysql'           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+#DATABASE_OPTIONS = {
+#  'read_default_file': '/etc/mysql/my.cnf',
+#}
 DATABASE_NAME = 'connectus'             # Or path to database file if using sqlite3.
 DATABASE_USER = 'root'             # Not used with sqlite3.
 DATABASE_PASSWORD = 'root'         # Not used with sqlite3.
@@ -78,6 +81,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+    #'connectus',
     'connectus.courses',
     'connectus.grades',
 )
