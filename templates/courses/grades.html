@@ -1,21 +1,27 @@
 <h2>Class: {{ course_title }}</h2>
 
-{% if all_grades %}
+{% load course_extras %}
+
+{% if all_gradeables %}
   <table border="1">
     <tr>
       <th>Student Name</th>
-      <th>Gradeable</th>
-      <th>Score</th>
-      <th>Comments</th>
+      {% for gradeable in all_gradeables %}
+      <th>{{ gradeable.name }}</th>
+      {% endfor %}  
     </tr>
-    {% for grade in all_grades %}
+    {% for student_name,grades in grades_by_student.items %}
     <tr>
-      <td>{{ grade.student }}</td>
-      <td>{{ grade.gradeable }}</td>
-      <td>{{ grade.score }}</td>
-      {% if grade.comment %}
-      <td>{{ grade.comment }}</td>
-      {% endif %}
+      <td>{{ student_name }}</td>
+      <!-- this is a hack due to django limitation on accessing
+           dictionary within a dictionary -->
+      {% for gradeable in all_gradeables %} 
+        {% for gradeable_name,grade in grades.items %}
+          {% ifequal gradeable_name gradeable.name %}
+          <td>{{ grade.score }}</td>
+          {% endifequal %}
+        {% endfor %}
+      {% endfor %}
     </tr>
     {% endfor %}
   </table>

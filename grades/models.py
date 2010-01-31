@@ -15,7 +15,6 @@ class Gradeable(models.Model):
 class Grade(models.Model):
   comment = models.CharField(max_length=250)
   score = models.FloatField()
-  # TODO: should limit choices only to those of the same course
   gradeable = models.ForeignKey(Gradeable)
   # TODO: These would be ForeignKeys
   student = models.CharField(max_length=50)
