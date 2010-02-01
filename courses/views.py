@@ -1,5 +1,6 @@
 from copy import deepcopy
 from django.shortcuts import get_object_or_404, render_to_response
+from django.template import RequestContext
 from connectus.courses.models import Course
 from connectus.grades.models import GradeForm
 
@@ -38,4 +39,5 @@ def grades(req, course_id):
                             { 'all_gradeables': all_gradeables, 
                               'gradeables_length': gradeables_length,
                               'grades_by_student': by_student,
-                              'course_title': course.title })
+                              'course_title': course.title },
+                            context_instance=RequestContext(req))

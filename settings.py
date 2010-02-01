@@ -85,3 +85,14 @@ INSTALLED_APPS = (
     'connectus.courses',
     'connectus.grades',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    # This will be used in Django 1.2 onwards
+    # For now, auth will provide this message processor
+    #"django.contrib.messages.context_processors.messages",
+    "connectus.app_helper.context_processors.sidebar"
+)
