@@ -1,31 +1,61 @@
-<h2>Class: {{ course_title }}</h2>
+{% extends "base/base_content_nav.html" %}
 
-{% load course_extras %}
+{% block head %}
+  <script type="text/javascript">
+    /* 
+       TODO: May not be the most efficient way.
+             Should ignore td hover.
+    */
+    var oTable;
 
-{% if all_gradeables %}
-  <table border="1">
-    <tr>
-      <th>Student Name</th>
-      {% for gradeable in all_gradeables %}
-      <th>{{ gradeable.name }}</th>
-      {% endfor %}  
-    </tr>
-    {% for student_name,grades in grades_by_student.items %}
-    <tr>
-      <td>{{ student_name }}</td>
-      <!-- this is a hack due to django limitation on accessing
-           dictionary within a dictionary -->
-      {% for gradeable in all_gradeables %} 
-        {% for gradeable_name,grade in grades.items %}
-          {% ifequal gradeable_name gradeable.name %}
-          <td>{{ grade.score }}</td>
-          {% endifequal %}
+    $(document).ready(function() {
+      $('#grades tbody td').hover( function() {
+        var iCol = $('td').index(this) % ({{ gradeables_length }} + 1);
+        var nTrs = oTable.fnGetNodes();
+        $('td:nth-child('+(iCol+1)+')', nTrs).addClass( 'highlighted' );
+      }, function() {
+        var nTrs = oTable.fnGetNodes();
+        $('td.highlighted', nTrs).removeClass('highlighted');
+      } );
+      
+      oTable = $('#grades').dataTable( {
+        "bSortClasses": false
+      } );
+    } );
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h2>{{ course_title }}</h2>
+
+  {% if all_gradeables %}
+    <table id="grades" class="display">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          {% for gradeable in all_gradeables %}
+          <th>{{ gradeable.name }}</th>
+          {% endfor %}  
+        </tr>
+      </thead>
+      <tbody>
+        {% for student_name,scores in grades_by_student.items %}
+        <tr>
+          <td>{{ student_name }}</td>
+          <!-- this is a hack due to django's limitation on accessing
+               dictionary within a dictionary -->
+          {% for gradeable in all_gradeables %} 
+            {% for gradeable_name,score in scores.items %}
+              {% ifequal gradeable_name gradeable.name %}
+              <td>{{ score }}</td>
+              {% endifequal %}
+            {% endfor %}
+          {% endfor %}
+        </tr>
         {% endfor %}
-      {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
-{% else %}
-    <p>No grades are available.</p>
-{% endif %}
-
+      </tbody>
+    </table>
+  {% else %}
+      <p>No grades are available.</p>
+  {% endif %}
+{% endblock %}

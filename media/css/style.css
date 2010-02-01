@@ -66,6 +66,10 @@ table.course thead th {
   margin: 0 10px 0;
 }
 
+#content-nav-view {
+  padding-top: 10px;
+}
+
 #content {
   color: black; 
 }
