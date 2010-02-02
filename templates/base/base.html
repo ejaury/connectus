@@ -32,13 +32,17 @@
   <div id="static-nav"></div>
   <div id="page-container">
     <div id="header">
-      <img class="logo" alt="Connectus" src="/site_media/css/images/connectus_logo.png"></img>
+      <div id="logo">
+        <a href="/"><img alt="Connectus" src="/site_media/css/images/logo_small.png"></img></a>
+      </div>
     </div>
     <div id="mid-wrapper">
       <div id="sidebar">
         <div class="padding">
           <dl>
-            <dt id="classes">Classes</dt>
+            <dt id="sidebar_classes">
+              <a href="{% url connectus.courses.views.index %}">Classes</a>
+            </dt>
               {% for course in courses %}
               <dd>
                 <a href="{% url connectus.courses.views.grades course.id %}">
@@ -46,7 +50,10 @@
                 </a>
               </dd>
               {% endfor %}
-            <dt id="calendar">Calendar</dt>
+            <dt id="sidebar_grades">
+              <a href="{% url connectus.grades.views.index %}">Grades</a>
+            </dt>
+            <dt id="sidebar_calendar">Calendar</dt>
           </dl>
         </div>
       </div>

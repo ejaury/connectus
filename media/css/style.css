@@ -10,6 +10,11 @@ body {
   font-size: medium;
 }
 
+a {
+  color: lightgrey;
+  text-decoration: none;
+}
+
 h1 {
   margin: 0;
   padding: 0;
@@ -30,7 +35,7 @@ table.course thead th {
 }
 
 #page-container {
-  background: white;
+  background: white;/*url("/site_media/css/images/drop_shadow.png") repeat-y;*/
   /* center this div */
   margin: auto;
   width: 960px;
@@ -38,9 +43,17 @@ table.course thead th {
 
 #header {
   background: black
-              url(images/header_bg.png);
-  height: 150px;
+              url("images/header_blank.jpg");
+  height: 200px;
   color: white;
+}
+
+#header #logo {
+  margin: 0;
+  padding: 0;
+  float: left;
+  margin-top: 23px;
+  padding-left: 26px;
 }
 
 #mid-wrapper {
@@ -123,3 +136,8 @@ table.course thead th {
 #footer a:hover {
   color: lightblue;
 }
+
+#header #logo a img {
+  border: none;
+}
+

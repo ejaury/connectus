@@ -6,7 +6,9 @@ from connectus.grades.models import GradeForm
 
 def index(req):
   all_courses = Course.objects.all().order_by('-id')
-  return render_to_response('courses/index.html', { 'all_courses': all_courses})
+  return render_to_response('courses/index.html',
+                            { 'all_courses': all_courses },
+                            context_instance=RequestContext(req))
 
 def grades(req, course_id):
   course = Course.objects.get(id=course_id)
