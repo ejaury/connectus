@@ -26,19 +26,21 @@ table.course {
   clear: both;
 }
 
-table.course thead th {
-  
-}
-
 .hidden {
   display: none;
 }
 
+#bg_container {
+  background:  url("/site_media/css/images/bg_shadow.png") repeat-y;
+  margin: auto;
+  width: 1000px;
+}
+
 #page-container {
-  background: white;/*url("/site_media/css/images/drop_shadow.png") repeat-y;*/
   /* center this div */
   margin: auto;
   width: 960px;
+  padding-bottom: 30px;
 }
 
 #header {
@@ -67,9 +69,21 @@ table.course thead th {
   width: 220px;
 }
 
+#toolbar {
+  background: transparent url("/site_media/css/images/bottom_bar.png") no-repeat scroll;
+  line-height: 35px;
+  margin-left: 20px;
+  position: fixed;
+  visibility: visible;
+  width: 960px; 
+  z-index: 1000;
+  bottom: 0;
+}
+
 #content-wrapper {
   background: #FFFFEE;
   margin-left: 220px;
+  min-height: 750px;
 }
 
 #content-nav {
@@ -95,6 +109,7 @@ table.course thead th {
   color: lightgray;
   padding: 10px 0 0 10px;
   line-height: 18px;
+  height: 30px;
 } 
 
 #header .logo {
@@ -141,3 +156,41 @@ table.course thead th {
   border: none;
 }
 
+#toolbar span {
+  color: white;
+  display: block;
+  font-size: small;
+  position: relative;
+}
+
+span#tb_search {
+  float: left;
+  margin-left: 20px;
+}
+
+span#tb_login {
+  float: right;
+  margin-right: 20px;
+}
+
+/*
+#toolbar ul {
+  bottom: 0;
+  position: absolute;
+}
+
+#toolbar ul li {
+  display: block;
+  position: relative;
+}
+
+#toolbar ul li#tb_search {
+  float: left;
+  margin-left: 20px;
+}
+
+#toolbar ul li#tb_login {
+  float: right;
+  margin-right: 20px;
+}
+*/

@@ -30,46 +30,56 @@
 
 <body>
   <div id="static-nav"></div>
-  <div id="page-container">
-    <div id="header">
-      <div id="logo">
-        <a href="/"><img alt="Connectus" src="/site_media/css/images/logo_small.png"></img></a>
-      </div>
-    </div>
-    <div id="mid-wrapper">
-      <div id="sidebar">
-        <div class="padding">
-          <dl>
-            <dt id="sidebar_classes">
-              <a href="{% url connectus.courses.views.index %}">Classes</a>
-            </dt>
-              {% for course in courses %}
-              <dd>
-                <a href="{% url connectus.courses.views.grades course.id %}">
-                  {{ course.title }}
-                </a>
-              </dd>
-              {% endfor %}
-            <dt id="sidebar_grades">
-              <a href="{% url connectus.grades.views.index %}">Grades</a>
-            </dt>
-            <dt id="sidebar_calendar">Calendar</dt>
-          </dl>
+  <div id="bg_container">
+    <div id="page-container">
+      <div id="header">
+        <div id="logo">
+          <a href="/"><img alt="Connectus" src="/site_media/css/images/logo_small.png"></img></a>
         </div>
       </div>
-      <div id="content-wrapper">
-        {% block content-nav %}
-        {% endblock %}
-        <div id="content">
+      <div id="mid-wrapper">
+        <div id="sidebar">
           <div class="padding">
-            {% block content %}
-              <h1>TESTING</h1>
-            {% endblock %}
+            <dl>
+              <dt id="sidebar_classes">
+                <a href="{% url connectus.courses.views.index %}">Classes</a>
+              </dt>
+                {% for course in courses %}
+                <dd>
+                  <a href="{% url connectus.courses.views.grades course.id %}">
+                    {{ course.title }}
+                  </a>
+                </dd>
+                {% endfor %}
+              <dt id="sidebar_grades">
+                <a href="{% url connectus.grades.views.index %}">Grades</a>
+              </dt>
+              <dt id="sidebar_calendar">Calendar</dt>
+            </dl>
+          </div>
+        </div>
+        <div id="content-wrapper">
+          {% block content-nav %}
+          {% endblock %}
+          <div id="content">
+            <div class="padding">
+              {% block content %}
+                <h1>TESTING</h1>
+              {% endblock %}
+            </div>
           </div>
         </div>
       </div>
+      <div id="footer">Copyright © 2010 Aegis</div>
     </div>
-    <div id="footer">Copyright Connectus 2010</div>
+    <div id="toolbar">
+      <span id="tb_search">Search  <input type="textfield"></input></span>
+      <span id="tb_login">Login</span>
+      <!--ul>
+        <li id="tb_search">Search</li>
+        <li id="tb_login">Login</li>
+      </ul-->
+    </div>
   </div>
 </body>
 </html>
