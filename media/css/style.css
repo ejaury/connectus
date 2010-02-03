@@ -103,7 +103,32 @@ table.course {
   margin: 0 10px 0;
 }
 
-#content-nav-view {
+#content-nav p {
+  margin: 0;
+  padding: 0;
+}
+
+#content_nav_sublinks {
+/*
+  float: right;
+  margin-right: 10px;
+  padding-top: 10px;
+*/
+}
+
+#content_nav_sublinks .content_nav_sublinks {
+  color: gray;
+  float: right;
+  margin-right: 10px;
+  padding-top: 10px;
+  text-align: center;
+}
+
+#content_nav_sublinks .content_nav_sublinks img {
+  padding: 0 15px;
+}
+
+#content_nav_view {
   padding-top: 10px;
 }
 
