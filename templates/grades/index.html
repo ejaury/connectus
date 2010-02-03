@@ -1,4 +1,4 @@
-{% extends "base/base_content_nav.html" %}
+{% extends "base/base.html" %}
 
 {% block head %}
   <script type="text/javascript">
@@ -31,6 +31,7 @@
 {% endblock %}
 
 {% block content %}
+  <h2>List of All Grades</h2>
   {% if all_grades %}
     <table id="grades" class="display">
       <thead>
