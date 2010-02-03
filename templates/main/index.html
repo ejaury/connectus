@@ -2,6 +2,18 @@
 
 
 {% block content %}
-<h2>BLAH BLAH</h2>
+<h2>Welcome to Connectus!</h2>
+<br/>
+<!-- TODO: Use different icons for diff class -->
+<div id="class_list">
+  {% for course in courses %}
+  <div id="{{ course.title|slugify }}" class="class_thumb">
+    <a href="{% url connectus.courses.views.grades course.id %}">
+      <img alt="{{ course.title }}" src="/site_media/css/images/thumb_view.png"/>
+      <p>{{ course.title }}</p>
+    </a>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
 
