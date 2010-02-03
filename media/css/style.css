@@ -6,8 +6,8 @@ html, body {
 
 body {
   background: white url('images/body-bg.gif') repeat-x top left;
-  font-family: "Myriad Pro", Helvetica, Verdana, Arial, Sans-serif;
-  font-size: medium;
+  font-family: "Myriad Pro", Verdana, Helvetica, Arial, Sans-serif;
+  font-size: 11pt;
 }
 
 a {
@@ -18,6 +18,10 @@ a {
 h1 {
   margin: 0;
   padding: 0;
+}
+
+a img {
+  border: none;
 }
 
 table.course {
@@ -33,7 +37,12 @@ table.course {
 #bg_container {
   background:  url("/site_media/css/images/bg_shadow.png") repeat-y;
   margin: auto;
-  width: 1000px;
+  width: 980px;
+}
+
+#class_list {
+  margin: 0;
+  padding: 0;
 }
 
 #page-container {
@@ -66,13 +75,14 @@ table.course {
   background: #333333;
   color: white;
   float: left;
+  font-size: medium;
   width: 220px;
 }
 
 #toolbar {
   background: transparent url("/site_media/css/images/bottom_bar.png") no-repeat scroll;
   line-height: 35px;
-  margin-left: 20px;
+  margin-left: 10px;
   position: fixed;
   visibility: visible;
   width: 960px; 
@@ -105,7 +115,7 @@ table.course {
   background: #666666;
   border-top: 1px solid lightgray;
   clear: both;
-  font-size: small;
+  font-size: 9pt;
   color: lightgray;
   padding: 10px 0 0 10px;
   line-height: 18px;
@@ -115,6 +125,21 @@ table.course {
 #header .logo {
   float: right;
   margin-top: 40px;
+}
+
+#class_list a {
+  color: gray;
+}
+
+#class_list a:hover {
+  color: black;
+  text-decoration: underline;
+}
+
+#class_list div.class_thumb {
+  float: left;
+  padding: 0 20px;
+  text-align: center;
 }
 
 #content h2 {
@@ -152,10 +177,6 @@ table.course {
   color: lightblue;
 }
 
-#header #logo a img {
-  border: none;
-}
-
 #toolbar span {
   color: white;
   display: block;
@@ -165,11 +186,14 @@ table.course {
 
 span#tb_search {
   float: left;
+  font-size: 10pt;
   margin-left: 20px;
 }
 
 span#tb_login {
   float: right;
+  font-size: 10pt;
+  font-weight: bold;
   margin-right: 20px;
 }
 
