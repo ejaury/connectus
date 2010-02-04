@@ -179,13 +179,17 @@ table.course {
   padding-bottom: 15px;
 }
 
-#content .padding {
+#content #content_main {
   line-height: 18px;
   padding: 10px;
 }
 
 #content-nav .padding {
   padding-left: 10px;
+}
+
+#detail_view:hover {
+  cursor: pointer;
 }
 
 #sidebar .padding {
@@ -207,6 +211,10 @@ table.course {
   display: block;
   font-size: small;
   position: relative;
+}
+
+#thumb_view:hover {
+  cursor: pointer;
 }
 
 span#tb_search {

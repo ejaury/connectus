@@ -24,6 +24,8 @@
   <script type="text/javascript" src="/site_media/js/jquery.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery.dataTables.js"></script>
 
+  {% block ajax %}
+  {% endblock %}
   {% block head %}
   {% endblock %}
 </head>
@@ -62,9 +64,8 @@
           {% block content-nav %}
           {% endblock %}
           <div id="content">
-            <div class="padding">
+            <div id="content_main">
               {% block content %}
-                <h1>TESTING</h1>
               {% endblock %}
             </div>
           </div>

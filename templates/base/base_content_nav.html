@@ -1,5 +1,32 @@
 {% extends "base/base.html" %}
 
+{% block ajax %}
+  <script type="text/javascript">
+    $.ajaxSetup ({
+      cache: false
+    });
+
+    $( document ).ready( function() {
+      var ajax_load = "<img src='/site_media/css/images/loading.gif' alt='loading...' />";
+
+      // Default action
+      $(function() {
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.view_seating_plan course_id %}');
+      });
+
+      $("#thumb_view").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.view_seating_plan course_id %}');
+      });
+      $("#detail_view").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.grades course_id %}');
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block content-nav %}
   <div id="content-nav">
     <div id="content_nav_sublinks">
@@ -17,8 +44,8 @@
       </div>
     </div>
     <div id="content_nav_view">
-      <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="25" height="25"/> 
-      <img src="/site_media/css/images/detail_view.png" alt="Detail View" width="25" height="25"/> 
+      <img id="thumb_view" src="/site_media/css/images/thumb_view.png" title="Switch to Thumbnail View" alt="Thumbnail View" width="25" height="25"/>
+      <img id="detail_view" src="/site_media/css/images/detail_view.png" title="Switch to Detail View" alt="Detail View" width="25" height="25"/>
     </div>
     <br/>
   </div>
