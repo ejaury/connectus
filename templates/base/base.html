@@ -22,6 +22,7 @@
   </style>
 
   <script type="text/javascript" src="/site_media/js/jquery.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery-ui.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery.dataTables.js"></script>
 
   {% block ajax %}
@@ -57,6 +58,7 @@
                 <a href="{% url connectus.grades.views.index %}">Grades</a>
               </dt>
               <dt id="sidebar_calendar">Calendar</dt>
+              <dt id="sidebar_calendar">Inbox</dt>
             </dl>
           </div>
         </div>
@@ -76,6 +78,7 @@
     <div id="toolbar">
       <span id="tb_search">Search  <input type="textfield"></input></span>
       <span id="tb_login">Logout</span>
+      <span id="tb_notification">Notification</span>
       <!--ul>
         <li id="tb_search">Search</li>
         <li id="tb_login">Login</li>
