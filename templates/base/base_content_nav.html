@@ -7,6 +7,9 @@
         placeholder: 'ui-sortable-placeholder'
       });
       $("#sortable_students").disableSelection();
+
+      /* Enable JEditable */
+      $('#grades tbody td').editable('/courses');
     }
 
     $.ajaxSetup ({
@@ -30,6 +33,8 @@
         $("#content_main").html(ajax_load).load(
           '{% url connectus.courses.views.grades course_id %}', enable_sorting);
       });
+
+
     });
   </script>
 {% endblock %}

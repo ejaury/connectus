@@ -147,6 +147,20 @@ table.course {
   height: 30px;
 } 
 
+#teacher_table_box {
+  background: #ffaa55;
+  border: 1px solid #dd7700;
+  height: 25px;
+  width: 200px;
+  margin: 10px auto 30px;
+  text-align: center;
+}
+
+#teacher_table_box span {
+  color: #aa5500;
+  line-height: 25px;
+}
+
 #header .logo {
   float: right;
   margin-top: 40px;

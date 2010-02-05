@@ -24,6 +24,7 @@
   <script type="text/javascript" src="/site_media/js/jquery.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery-ui.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" src="/site_media/js/jquery.jeditable.js"></script>
 
   {% block ajax %}
   {% endblock %}
@@ -44,6 +45,7 @@
         <div id="sidebar">
           <div class="padding">
             <dl>
+              <dt id="sidebar_calendar">Inbox</dt>
               <dt id="sidebar_classes">
                 <a href="{% url connectus.courses.views.index %}">Classes</a>
               </dt>
@@ -58,7 +60,6 @@
                 <a href="{% url connectus.grades.views.index %}">Grades</a>
               </dt>
               <dt id="sidebar_calendar">Calendar</dt>
-              <dt id="sidebar_calendar">Inbox</dt>
             </dl>
           </div>
         </div>
