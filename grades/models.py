@@ -1,5 +1,6 @@
 from django.db import models
 from django.forms import ModelForm
+from django.contrib.auth.models import User
 from connectus.courses.models import Course
 
 # Create your models here.
@@ -16,11 +17,12 @@ class Grade(models.Model):
   comment = models.CharField(max_length=250, null=True)
   score = models.FloatField()
   gradeable = models.ForeignKey(Gradeable)
-  # TODO: These would be ForeignKeys
-  student = models.CharField(max_length=50)
+  student = models.ForeignKey(User)
 
   def __unicode__(self):
-    return '%s - %s' % (self.student, self.gradeable.name)
+    return '%s %s - %s' % (self.student.first_name,
+                           self.student.last_name,
+                           self.gradeable.name)
 
 class GradeForm(ModelForm):
   class Meta:

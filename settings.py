@@ -81,9 +81,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.admin',
+    'south',
     #'connectus',
     'connectus.courses',
     'connectus.grades',
+    'connectus.user_info',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -96,3 +98,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     #"django.contrib.messages.context_processors.messages",
     "connectus.app_helper.context_processors.sidebar"
 )
+
+AUTH_PROFILE_MODULE = 'user_info.UserProfile'

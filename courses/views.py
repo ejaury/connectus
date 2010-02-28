@@ -1,8 +1,9 @@
 from copy import deepcopy
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from connectus.courses.models import Course
-from connectus.grades.models import GradeForm
+from connectus.grades.models import Grade, GradeForm
 
 def index(req):
   all_courses = Course.objects.all().order_by('-id')
@@ -24,10 +25,10 @@ def grades(req, course_id):
       for grade in all_grades:
         if not by_student.get(grade.student, None):
           by_gradeable = {}
-          by_gradeable[gradeable.name] = grade.score
+          by_gradeable[gradeable.name] = grade
           by_student[grade.student] = by_gradeable
         else:
-          by_student[grade.student][gradeable.name] = grade.score
+          by_student[grade.student][gradeable.name] = grade
 
     # Hack due to Django's limitation on accessing dictionary
     # within a dictionary:
@@ -67,3 +68,13 @@ def view_seating_plan(req, course_id):
                                 'course': course
                               },
                               context_instance=RequestContext(req))
+
+def update_grades(req, course_id):
+  if req.method == 'POST':
+    grade = Grade.objects.get(id=req.POST['id'])
+
+    if grade:
+      grade.score = req.POST['value']
+      grade.save()
+
+      return HttpResponse(float(grade.score))

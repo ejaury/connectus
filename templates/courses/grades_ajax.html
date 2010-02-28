@@ -37,15 +37,15 @@
         </tr>
       </thead>
       <tbody>
-        {% for student_name,scores in grades_by_student.items %}
+        {% for student,grades in grades_by_student.items %}
         <tr>
-          <td>{{ student_name }}</td>
+          <td>{{ student.first_name }} {{ student.last_name }}</td>
           <!-- this is a hack due to django's limitation on accessing
                dictionary within a dictionary -->
           {% for gradeable in all_gradeables %} 
-            {% for gradeable_name,score in scores.items %}
+            {% for gradeable_name,grade in grades.items %}
               {% ifequal gradeable_name gradeable.name %}
-              <td>{{ score }}</td>
+              <td id="{{ grade.id }}">{{ grade.score}}</td>
               {% endifequal %}
             {% endfor %}
           {% endfor %}
