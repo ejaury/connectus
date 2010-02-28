@@ -45,7 +45,7 @@
           {% for gradeable in all_gradeables %} 
             {% for gradeable_name,grade in grades.items %}
               {% ifequal gradeable_name gradeable.name %}
-              <td id="{{ grade.id }}">{{ grade.score}}</td>
+              <td class="inline-editable" id="{{ grade.id }}">{{ grade.score}}</td>
               {% endifequal %}
             {% endfor %}
           {% endfor %}

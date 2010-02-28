@@ -9,7 +9,7 @@
       $("#sortable_students").disableSelection();
 
       /* Enable JEditable */
-      $('#grades tbody td').editable('/courses/{{ course_id }}/grades/update', {
+      $('.inline-editable').editable('/courses/{{ course_id }}/grades/update', {
          indicator : 'Saving...',
          tooltip   : 'Click to edit...'
       });
