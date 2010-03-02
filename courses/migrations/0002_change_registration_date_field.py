@@ -7,34 +7,21 @@ class Migration:
     
     def forwards(self, orm):
         
-        # Adding model 'Course'
-        db.create_table('courses_course', (
-            ('id', orm['courses.Course:id']),
-            ('title', orm['courses.Course:title']),
-            ('description', orm['courses.Course:description']),
-            ('term', orm['courses.Course:term']),
-            ('year', orm['courses.Course:year']),
-        ))
-        db.send_create_signal('courses', ['Course'])
+        # Adding field 'CourseRegistration.created_at'
+        db.add_column('courses_courseregistration', 'created_at', orm['courses.courseregistration:created_at'])
         
-        # Adding model 'CourseRegistration'
-        db.create_table('courses_courseregistration', (
-            ('id', orm['courses.CourseRegistration:id']),
-            ('course', orm['courses.CourseRegistration:course']),
-            ('student', orm['courses.CourseRegistration:student']),
-            ('date_registered', orm['courses.CourseRegistration:date_registered']),
-        ))
-        db.send_create_signal('courses', ['CourseRegistration'])
+        # Deleting field 'CourseRegistration.date_registered'
+        db.delete_column('courses_courseregistration', 'date_registered')
         
     
     
     def backwards(self, orm):
         
-        # Deleting model 'Course'
-        db.delete_table('courses_course')
+        # Deleting field 'CourseRegistration.created_at'
+        db.delete_column('courses_courseregistration', 'created_at')
         
-        # Deleting model 'CourseRegistration'
-        db.delete_table('courses_courseregistration')
+        # Adding field 'CourseRegistration.date_registered'
+        db.add_column('courses_courseregistration', 'date_registered', orm['courses.courseregistration:date_registered'])
         
     
     
@@ -83,7 +70,7 @@ class Migration:
         },
         'courses.courseregistration': {
             'course': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['courses.Course']"}),
-            'date_registered': ('django.db.models.fields.DateField', [], {}),
+            'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'student': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         }
