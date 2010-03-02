@@ -19,12 +19,49 @@
   <style type="text/css" title="currentStyle">
     @import url("/site_media/css/style.css");
     @import url("/site_media/css/data_table.css");
+    @import url("/site_media/css/jx.stylesheet.css");
   </style>
 
   <script type="text/javascript" src="/site_media/js/jquery.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery-ui.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery.dataTables.js"></script>
   <script type="text/javascript" src="/site_media/js/jquery.jeditable.js"></script>
+  <script type="text/javascript" src="/site_media/js/jixedbar.js"></script>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+      /* Enable toolbar */
+      $("#h_toolbar").jixedbar({
+        roundedCorners: true
+      });
+    });
+  </script>
+
+  <script type="text/javascript">
+    var active_color = '#000'; // Colour of user provided text
+    var inactive_color = '#999'; // Colour of default text
+
+    /* Hide default value on Search field */
+    $(document).ready(function() {
+      $("input.default-value").css("color", inactive_color);
+      var default_values = new Array();
+      $("input.default-value").focus(function() {
+        if (!default_values[this.id]) {
+          default_values[this.id] = this.value;
+        }
+        if (this.value == default_values[this.id]) {
+          this.value = '';
+          this.style.color = active_color;
+        }
+        $(this).blur(function() {
+          if (this.value == '') {
+            this.style.color = inactive_color;
+            this.value = default_values[this.id];
+          }
+        });
+      });
+    });
+  </script>
 
   {% block ajax %}
   {% endblock %}
@@ -76,15 +113,37 @@
       </div>
       <div id="footer">Copyright © 2010 Aegis</div>
     </div>
-    <div id="toolbar">
+    <div id="h_toolbar">
+      <ul>
+        <li alt="Go back to Home">
+          <a href="/">Home</a>
+        </li>
+      </ul>
+      <span class="jx-separator-left"></span>
+      <ul>
+        <li style="padding: 2px 8px;">
+          <input class="default-value" type="textfield" value="Search..." style="font-family: Verdana; font-size: 11px;"></input>
+        </li>
+      </ul>
+      <span class="jx-separator-left"></span>
+      <ul class="jx-bar-button-right">
+        <li alt="Logout from your account">Logout</li>
+      </ul>
+      <span class="jx-separator-right"></span>
+      <ul class="jx-bar-button-right">
+        <li alt="Check for message notification">Notification</li>
+      </ul>
+      <span class="jx-separator-right"></span>
+    </div>
+    <!--div id="toolbar">
       <span id="tb_search">Search  <input type="textfield"></input></span>
       <span id="tb_login">Logout</span>
-      <span id="tb_notification">Notification</span>
+      <span id="tb_notification">Notification</span-->
       <!--ul>
         <li id="tb_search">Search</li>
         <li id="tb_login">Login</li>
       </ul-->
-    </div>
+    <!--/div-->
   </div>
 </body>
 </html>

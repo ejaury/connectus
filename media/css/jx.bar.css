@@ -1,0 +1,138 @@
+/**
+ * Default theme for jixedbar
+ * written by Ryan Yonzon, http://ryan.rawswift.com/
+ */
+				
+/*----- bar style -----*/
+.jx-bar {
+	height:30px;
+	padding:0px;
+	width:80%;
+	background-color:#e5e5e5;
+	border:#b5b5b5 solid 1px;
+}
+
+	/* rounded top-left corner */
+	.jx-bar-rounded-tl {
+		-webkit-border-top-left-radius:5px;
+		-khtml-border-radius-topleft:5px;	
+		-moz-border-radius-topleft:5px;
+		border-top-left-radius:5px;
+	}
+
+	/* rounded top-right corner */
+	.jx-bar-rounded-tr {
+		-webkit-border-top-right-radius:5px;
+		-khtml-border-radius-topright:5px;	
+		-moz-border-radius-topright:5px;
+		border-top-right-radius:5px;
+	}
+
+/*----- bar separator -----*/
+.jx-bar span {
+	width:1px;
+	height:100%;
+	background-color:#CCCCCC;
+}
+
+	.jx-separator-left {
+		float:left;
+	}
+	
+	.jx-separator-right {
+		float:right;
+	}
+
+/*----- bar button -----*/
+.jx-bar-button ul {
+	margin:0px;
+	padding:0px;
+}
+
+.jx-bar-button li {
+	float:left;
+	list-style:none;
+}
+
+.jx-bar-button-right li {
+	float:right;
+	list-style:none;	
+}
+
+.jx-bar-button li {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	cursor:pointer;
+	padding:4px 8px 4px 8px;
+	border:#e5e5e5 solid 1px;	
+	margin:2px;
+}
+	
+	/*	button hover effect	*/
+	.jx-bar-button li:hover {
+		background-color:#EEEEEE;
+		border:#CCCCCC solid 1px;
+		padding:4px 8px 4px 8px;
+		margin:2px;
+	}
+
+	/* rounded button corners */
+	.jx-bar-button-rounded li:hover {
+		-webkit-border-radius:5px;
+		-khtml-border-radius:5px;	
+		-moz-border-radius:5px;
+		border-radius:5px;
+	}
+	
+	/* default button's anchor text style */
+	.jx-bar-button li a:link, .jx-bar-button li a:visited {
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:11px;
+		color:#666666;
+		text-decoration:none;
+	}
+
+	.jx-bar-button li a:hover {
+		font-family:Verdana, Arial, Helvetica, sans-serif;
+		font-size:11px;
+		color:#333333;
+		text-decoration:none;
+	}
+
+/*----- bar text container -----*/
+.jx-bar-button div {
+	float:left;
+}
+
+.jx-bar-button-right div {
+	float:right;
+}
+
+.jx-bar-button div {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+	color:#666666;
+	padding:4px 8px 4px 8px;
+	margin:4px 8px 4px 8px;	
+	border:#e5e5e5 solid 1px;
+}
+
+	.jx-bar-button div a:link,  .jx-bar-button div a:visited {
+		color:#666666;
+		text-decoration:none;
+	}
+
+	.jx-bar-button div a:hover {
+		color:#0099FF;
+		text-decoration:none;
+	}
+
+/*----- button tooltip -----*/
+.jx-bar-button-tooltip {
+	height:auto;
+	padding:5px 10px 5px 10px;
+	color:#FFFFFF;
+	background-color:#36393D;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size:11px;
+}
