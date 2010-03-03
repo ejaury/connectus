@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from connectus.courses.models import Course
 from connectus.grades.models import Grade, GradeForm
+from connectus.user_info.models import UserProfile
 
 def index(req):
   all_courses = Course.objects.all().order_by('-id')
@@ -62,10 +63,29 @@ def grades(req, course_id):
                             context_instance=RequestContext(req))
 
 def view_seating_plan(req, course_id):
-  course = Course.objects.get(id=course_id)
+  profile_img_basepath = UserProfile.IMAGE_BASE_PATH
   if req.is_ajax():
+    course = Course.objects.get(id=course_id)
+    # TODO: Order ascendingly by student's registration time
+    registered_students = course.students.all()
+    seating_left = {}
+    seating_right = {}
+    right_counter = 0
+    left_counter = 0
+
+    for idx,student in enumerate(registered_students):
+      if (idx < (len(registered_students) / 2)):
+        seating_left['left_%i' % left_counter] = student
+        left_counter += 1
+      else:
+        seating_right['right_%i' % right_counter] = student
+        right_counter += 1
+
     return render_to_response('courses/view_seating_plan.html', {
-                                'course': course
+                                'course': course,
+                                'profile_img_basepath': profile_img_basepath,
+                                'seating_left': seating_left,
+                                'seating_right': seating_right,
                               },
                               context_instance=RequestContext(req))
 

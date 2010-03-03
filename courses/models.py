@@ -17,3 +17,7 @@ class CourseRegistration(models.Model):
   # TODO: should only add user associated with group 'Student'
   student = models.ForeignKey(User)
   created_at = models.DateTimeField(auto_now_add=True)
+
+  def __unicode__(self):
+    return '%s - %s %s' % (self.course.title, self.student.first_name,
+      self.student.last_name)
