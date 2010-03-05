@@ -21,6 +21,11 @@ class CourseRegistration(models.Model):
   seat_number = models.SmallIntegerField(blank=True,null=True)
   created_at = models.DateTimeField(auto_now_add=True)
 
+  class Meta:
+    # ensure uniqueness for seat_number within a course, and for student within
+    # a course
+    unique_together = (('course', 'seat_number'), ('course', 'student'))
+
   def __unicode__(self):
     return '%s - %s %s' % (self.course.title, self.student.first_name,
       self.student.last_name)
