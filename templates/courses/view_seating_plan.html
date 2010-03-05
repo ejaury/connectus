@@ -5,21 +5,33 @@
   </div>
   <div id="seating_plan">
     <ul id="sortable_students_col_1" class="connectedSortable">
-      {% for id,student in seating_left.items %}
-        <li id="{{ id }}" class="ui-state-default">
-          <img alt="{{ student.first_name }} {{ student.last_name }}"
-               src="{{ profile_img_basepath }}/{{ student.get_profile.image_path }}"/>
-          <p>{{ student.first_name }} {{ student.last_name }}</p>
-        </li>
+      {% for seat_info in seating_left %}
+        {% if seat_info.1 %}
+          <li id="seat_{{ seat_info.0 }}" class="ui-state-default">
+            <img alt="{{ seat_info.1.first_name }} {{ seat_info.1.last_name }}"
+                 src="{{ profile_img_basepath }}/{{ seat_info.1.get_profile.image_path }}"/>
+            <p>{{ seat_info.1.first_name }} {{ seat_info.1.last_name }}</p>
+          </li>
+        {% else %}
+          <li id="seat_{{ seat_info.0 }}" class="ui-state-default">
+            <p> </p>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
     <ul id="sortable_students_col_2" class="connectedSortable">
-      {% for id,student in seating_right.items %}
-        <li id="{{ id }}" class="ui-state-default">
-          <img alt="{{ student.first_name }} {{ student.last_name }}"
-               src="{{ profile_img_basepath }}/{{ student.get_profile.image_path }}"/>
-          <p>{{ student.first_name }} {{ student.last_name }}</p>
-        </li>
+      {% for seat_info in seating_right %}
+        {% if seat_info.1 %}
+          <li id="seat_{{ seat_info.0 }}" class="ui-state-default">
+            <img alt="{{ seat_info.1.first_name }} {{ seat_info.1.last_name }}"
+                 src="{{ profile_img_basepath }}/{{ seat_info.1.get_profile.image_path }}"/>
+            <p>{{ seat_info.1.first_name }} {{ seat_info.1.last_name }}</p>
+          </li>
+        {% else %}
+          <li id="seat_{{ seat_info.0 }}" class="ui-state-default">
+            <p> </p>
+          </li>
+        {% endif %}
       {% endfor %}
     </ul>
   </div>

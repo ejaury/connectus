@@ -6,7 +6,13 @@
       $(function() {
         $("#sortable_students_col_1, #sortable_students_col_2").sortable({
           connectWith: '.connectedSortable',
-          placeholder: 'ui-sortable-placeholder'
+          placeholder: 'ui-sortable-placeholder',
+          update : function () { 
+            var order_left = $('#sortable_students_col_1').sortable('serialize'); 
+            var order_right = $('#sortable_students_col_2').sortable('serialize'); 
+            $.post("/courses/{{ course_id }}/update_seating_order?"+order_left+"&"+order_right); 
+          } 
+
         }).disableSelection();
       });
 

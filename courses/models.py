@@ -8,6 +8,7 @@ class Course(models.Model):
   term = models.CharField(max_length=10)
   year = models.IntegerField()
   students = models.ManyToManyField(User, through='CourseRegistration')
+  seat_order = models.TextField(blank=True,null=True)
 
   def __unicode__(self):
     return self.title
@@ -16,6 +17,8 @@ class CourseRegistration(models.Model):
   course = models.ForeignKey(Course)
   # TODO: should only add user associated with group 'Student'
   student = models.ForeignKey(User)
+  # TODO: should only allow seat_number that is unique within course_id
+  seat_number = models.SmallIntegerField(blank=True,null=True)
   created_at = models.DateTimeField(auto_now_add=True)
 
   def __unicode__(self):

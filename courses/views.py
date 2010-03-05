@@ -1,8 +1,10 @@
+import json
+import random
 from copy import deepcopy
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from connectus.courses.models import Course
+from connectus.courses.models import Course, CourseRegistration
 from connectus.grades.models import Grade, GradeForm
 from connectus.user_info.models import UserProfile
 
@@ -64,22 +66,71 @@ def grades(req, course_id):
 
 def view_seating_plan(req, course_id):
   profile_img_basepath = UserProfile.IMAGE_BASE_PATH
+  max_seats = 20
   if req.is_ajax():
     course = Course.objects.get(id=course_id)
     # TODO: Order ascendingly by student's registration time
     registered_students = course.students.all()
-    seating_left = {}
-    seating_right = {}
-    right_counter = 0
-    left_counter = 0
+    reg_info = CourseRegistration.objects.filter(course=course.id)
+    seating_left = [] 
+    seating_right = [] 
 
-    for idx,student in enumerate(registered_students):
-      if (idx < (len(registered_students) / 2)):
-        seating_left['left_%i' % left_counter] = student
-        left_counter += 1
+    if len(reg_info) > max_seats:
+      raise AssertionError('Number of students registered in class %i exceeds \
+        class capacity which is %i' % (len(reg_info), max_seats))
+
+    if not course.seat_order.strip():
+      # no ordering, initialize
+      order = range(max_seats)
+      serialized_order = json.dumps(order)
+      course.seat_order = serialized_order
+      course.save()
+
+      # init seat number
+      pos = 0
+      for student in reg_info:
+        student.seat_number = pos
+        student.save()
+        pos += 1
+
+    order = json.loads(course.seat_order)
+
+    # populate currently occupied seat numbers
+    current_seat_numbers = []
+    for info in reg_info:
+      if info.seat_number:
+        current_seat_numbers.append(info.seat_number)
+
+    seat_num_student_pair = {}
+
+    for info in reg_info:
+      if info.seat_number:
+        seat_num_student_pair[info.seat_number] = info.student
       else:
-        seating_right['right_%i' % right_counter] = student
-        right_counter += 1
+        # crude way to choose an available seat number
+        # if seat number has not been assigned
+        while True:
+          info.seat_number = random.randint(0, max_seats - 1)
+          if info.seat_number not in current_seat_numbers:
+            info.save()
+            seat_num_student_pair[info.seat_number] = info.student
+            break
+
+    counter = 0
+    for seat_num in order:
+      student = seat_num_student_pair.get(seat_num)
+
+      if student:
+        seat_info = (seat_num, student)
+      else:
+        seat_info = (seat_num,)
+
+      if (counter < (max_seats / 2)):
+        seating_left.append(seat_info)
+      else:
+        seating_right.append(seat_info)
+
+      counter += 1
 
     return render_to_response('courses/view_seating_plan.html', {
                                 'course': course,
@@ -98,3 +149,18 @@ def update_grades(req, course_id):
       grade.save()
 
       return HttpResponse(float(grade.score))
+
+def update_seating_order(req, course_id):
+  if req.is_ajax():
+    course = Course.objects.get(id=course_id)
+    new_seat_order = [] 
+
+    if req.GET.getlist('seat[]'):
+      #convert to int
+      for order in req.GET.getlist('seat[]'):
+        new_seat_order.append(int(order))
+
+      course.seat_order = json.dumps(new_seat_order)
+      course.save()
+
+    return HttpResponse()
