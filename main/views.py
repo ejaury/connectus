@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from connectus.main.helper import LoginForm
+from connectus.app_helper.helper import LoginForm
 
 def index(req):
   return render_to_response('main/index.html',
