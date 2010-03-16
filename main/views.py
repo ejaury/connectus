@@ -32,4 +32,6 @@ def login_user(request):
       print 'INVALID LOGIN'
       # Return an 'invalid login' error message.
 
-  return render_to_response('main/login.html', { 'form': form })
+  return render_to_response('main/login.html',
+                            { 'form': form },
+                            context_instance=RequestContext(request))

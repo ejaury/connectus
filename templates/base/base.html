@@ -137,7 +137,7 @@
         </li>
       </ul>
       <span class="jx-separator-left"></span>
-      {% if user.is_authenticated %}
+      {% if not user.is_anonymous %}
         <ul class="jx-bar-button-left">
           <li>
             <i>
