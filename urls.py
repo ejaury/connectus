@@ -14,8 +14,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     (r'^$', 'connectus.main.views.index'),
+    (r'^accounts/login/$', 'connectus.main.views.login_user'),
+    #(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name':'main/login.html'}),
+    (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name':'main/index.html'}),
     (r'^courses/', include('connectus.courses.urls')),
     (r'^grades/', include('connectus.grades.urls')),
+    (r'^schedule/', include('connectus.schedule.urls')),
     (r'^admin/', include(admin.site.urls)),
     # TODO: this conf is for production only
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {

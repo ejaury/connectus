@@ -82,10 +82,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.admin',
     'south',
-    #'connectus',
     'connectus.courses',
     'connectus.grades',
     'connectus.user_info',
+    'connectus.schedule',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -100,3 +100,5 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 AUTH_PROFILE_MODULE = 'user_info.UserProfile'
+LOGIN_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = '/'

@@ -96,7 +96,9 @@
               <dt id="sidebar_grades">
                 <a href="{% url connectus.grades.views.index %}">Grades</a>
               </dt>
-              <dt id="sidebar_calendar">Calendar</dt>
+              <dt id="sidebar_calendar">
+                <a href="{% url connectus.schedule.views.view %}">Calendar</a>
+              </dt>
             </dl>
           </div>
         </div>
@@ -122,7 +124,6 @@
         <li id="tb_login">Login</li>
       </ul-->
     <!--/div-->
-  </div>
     <div id="h_toolbar">
       <ul>
         <li alt="Go back to Home">
@@ -136,8 +137,28 @@
         </li>
       </ul>
       <span class="jx-separator-left"></span>
+      {% if user.is_authenticated %}
+        <ul class="jx-bar-button-left">
+          <li>
+            <i>
+            Welcome, 
+              {% if user.first_name and user.last_name %}
+                <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
+              {% else %}
+                <strong>{{ user.username }}</strong>!
+              {% endif %}
+            </i>
+          </li>
+        </ul>
+      {% endif %}
       <ul class="jx-bar-button-right">
-        <li alt="Logout from your account">Logout</li>
+        <li alt="Login/Logout from your account">
+          {% if not user.is_anonymous %}
+            <a href="/accounts/logout"><strong>Logout</strong></a>
+          {% else %}
+            <a href="/accounts/login">Login</a>
+          {% endif %}
+        </li>
       </ul>
       <span class="jx-separator-right"></span>
       <ul class="jx-bar-button-right">
@@ -145,5 +166,6 @@
       </ul>
       <span class="jx-separator-right"></span>
     </div>
+  </div>
 </body>
 </html>
