@@ -29,3 +29,15 @@ class CourseRegistration(models.Model):
   def __unicode__(self):
     return '%s - %s %s' % (self.course.title, self.student.first_name,
       self.student.last_name)
+
+class Attendance(models.Model):
+  # by default, attendance info only saved if student attends the class
+  course = models.ForeignKey(Course)
+  student = models.ForeignKey(User)
+  date = models.DateField()
+
+  def __unicode__(self):
+    return '%s: %s %s (%s)' % (self.date,
+                            self.student.first_name,
+                            self.student.last_name,
+                            self.course.title)

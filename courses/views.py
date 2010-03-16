@@ -1,10 +1,11 @@
+import datetime
 import json
 import random
 from copy import deepcopy
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from connectus.courses.models import Course, CourseRegistration
+from connectus.courses.models import Course, CourseRegistration, Attendance
 from connectus.grades.models import Grade, GradeForm
 from connectus.user_info.models import UserProfile
 
@@ -140,6 +141,30 @@ def view_seating_plan(req, course_id):
                               },
                               context_instance=RequestContext(req))
 
+def attendance(req, course_id):
+  if req.is_ajax():
+    date = datetime.date.today() - datetime.timedelta(1)
+    s_attending = Attendance.objects.filter(course__id=course_id, date=date)
+    s_registered = CourseRegistration.objects.filter(course__id=course_id)
+    attendance_d = {} 
+    for att in s_attending: 
+      attendance_d[att.student] = True
+    for reg in s_registered:
+      if reg.student not in attendance_d:
+        attendance_d[reg.student] = False
+
+    attendance = [] 
+    for student,att in attendance_d.items():
+      attendance.append((student, att))
+    attendance.sort(__user_tuple_compare)
+
+    return render_to_response('courses/view_attendance.html', {
+                                'attendance': attendance,
+                                'course_title': Course.objects.get(id=course_id).title,
+                                'date': date.strftime("%A, %B %d, %Y"),
+                              },
+                              context_instance=RequestContext(req))
+
 def update_grades(req, course_id):
   if req.method == 'POST':
     grade = Grade.objects.get(id=req.POST['id'])
@@ -164,3 +189,13 @@ def update_seating_order(req, course_id):
       course.save()
 
     return HttpResponse()
+
+def __user_tuple_compare(a, b):
+  x = '%s %s' % (a[0].first_name, a[0].last_name)
+  y = '%s %s' % (b[0].first_name, b[0].last_name)
+  if x > y:
+    return 1
+  elif x == y:
+    return 0
+  else:
+    return -1

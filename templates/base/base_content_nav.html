@@ -45,6 +45,15 @@
           '{% url connectus.courses.views.grades course_id %}', enable_sorting);
       });
 
+      $("#view_attendance").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.attendance course_id %}', enable_sorting);
+      });
+      $("#view_grades").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.grades course_id %}', enable_sorting);
+      });
+
 
     });
   </script>
@@ -64,15 +73,15 @@
 {% block content-nav %}
   <div id="content-nav">
     <div id="content_nav_sublinks">
-      <div class="content_nav_sublinks">
+      <div id="view_status" class="content_nav_sublinks">
         <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
         <p>Status</p>
       </div> 
-      <div class="content_nav_sublinks">
+      <div id="view_grades" class="content_nav_sublinks">
         <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
         <p>Grades</p>
       </div>
-      <div class="content_nav_sublinks">
+      <div id="view_attendance" class="content_nav_sublinks">
         <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
         <p>Attendance</p>
       </div>

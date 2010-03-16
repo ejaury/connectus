@@ -1,0 +1,25 @@
+{% block content %}
+    <h2>{{ course_title }} Attendance</h2>
+    <h3>{{ date }}</h3>
+    <table id="attendance" class="display">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Attendance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for att in attendance %} 
+        <tr>
+          <td>{{ att.0.first_name }} {{ att.0.student.last_name }}</td>
+          {% if att.1 %}
+            <td>Yes</td>
+          {% else %}
+            <td>No</td>
+          {% endif %}
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  
+{% endblock %}
