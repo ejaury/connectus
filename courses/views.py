@@ -5,6 +5,7 @@ from copy import deepcopy
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
+from connectus.app_helper.helper import DateForm
 from connectus.courses.models import Course, CourseRegistration, Attendance
 from connectus.grades.models import Grade, GradeForm
 from connectus.user_info.models import UserProfile
@@ -142,8 +143,18 @@ def view_seating_plan(req, course_id):
                               context_instance=RequestContext(req))
 
 def attendance(req, course_id):
+  print req.method
   if req.is_ajax():
-    date = datetime.date.today() - datetime.timedelta(1)
+    form = DateForm()
+    update = False
+    if req.method == 'POST':
+      date = req.POST.get('date')
+      date = datetime.datetime.strptime(date, '%Y-%m-%d')
+      update = True
+    else:
+      # TODO: change this to Today's date
+      date = datetime.date.today()
+
     s_attending = Attendance.objects.filter(course__id=course_id, date=date)
     s_registered = CourseRegistration.objects.filter(course__id=course_id)
     attendance_d = {} 
@@ -160,8 +171,11 @@ def attendance(req, course_id):
 
     return render_to_response('courses/view_attendance.html', {
                                 'attendance': attendance,
+                                'course_id': course_id,
                                 'course_title': Course.objects.get(id=course_id).title,
                                 'date': date.strftime("%A, %B %d, %Y"),
+                                'form': form,
+                                'update': update,
                               },
                               context_instance=RequestContext(req))
 

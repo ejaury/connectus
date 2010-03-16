@@ -1,11 +1,20 @@
 {% block content %}
+  {% if not update %}
     <h2>{{ course_title }} Attendance</h2>
+
+    <form id="change_date_form" action="/courses/{{ course_id }}/attendance/" method="post">
+      {{ form.as_p }}
+      <input type="submit" value="Go" />
+    </form>
+  {% endif %}
+
+  <div id="attendance">
     <h3>{{ date }}</h3>
-    <table id="attendance" class="display">
+    <table id="t_attendance" class="display">
       <thead>
         <tr>
           <th>Student Name</th>
-          <th>Attendance</th>
+          <th>Attended Class?</th>
         </tr>
       </thead>
       <tbody>
@@ -13,13 +22,14 @@
         <tr>
           <td>{{ att.0.first_name }} {{ att.0.student.last_name }}</td>
           {% if att.1 %}
-            <td>Yes</td>
+            <td style="color: green">Yes</td>
           {% else %}
-            <td>No</td>
+            <td style="color: red">No</td>
           {% endif %}
         </tr>
         {% endfor %}
       </tbody>
     </table>
+  </div>
   
 {% endblock %}

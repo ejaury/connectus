@@ -21,6 +21,21 @@
          tooltip   : 'Click to edit...'
       });
 
+      $('#change_date_form').ajaxForm({
+        target: '#attendance',
+        success: function() {
+          $('#attendance').fadeIn('slow');
+        }
+      });
+
+      /* Datepicker */
+      $("#id_date").datepicker({
+        dateFormat: 'yy-mm-dd',
+        onSelect: function() {
+          $("#change_date_form").submit();
+        }
+      });
+
     }
 
     $.ajaxSetup ({
@@ -54,9 +69,9 @@
           '{% url connectus.courses.views.grades course_id %}', enable_sorting);
       });
 
-
     });
   </script>
+
 {% endblock %}
 
 {% block head %}
