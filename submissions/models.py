@@ -12,9 +12,18 @@ class GradeableFileUpload(models.Model):
   class Meta:
     abstract = True
 
+  def __unicode__(self):
+    return '%s (%s)' % (self.gradeable.name, self.gradeable.course.title)
+
 class StudentSubmission(GradeableFileUpload):
   student = models.ForeignKey(User)
   submission_date = models.DateTimeField()
+
+  def __unicode__(self):
+    return '%s (%s): %s %s' % (self.gradeable.name,
+                               self.gradeable.course.title,
+                               self.student.first_name,
+                               self.student.last_name,)
 
 class AssignmentFileUpload(GradeableFileUpload):
   due_date = models.DateTimeField()
