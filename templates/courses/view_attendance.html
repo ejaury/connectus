@@ -3,8 +3,8 @@
     <h2>{{ course_title }} Attendance</h2>
 
     <form id="change_date_form" action="/courses/{{ course_id }}/attendance/" method="post">
-      {{ form.as_p }}
-      <input type="submit" value="Go" />
+      <label for="id_date">Date:</label>
+      <input type="text" id="id_date" name="date">
     </form>
   {% endif %}
 
