@@ -20,5 +20,15 @@ urlpatterns = patterns('',
     (r'^(?P<course_id>\d+)/view_seating_plan/$', 'connectus.courses.views.view_seating_plan'),
     (r'^(?P<course_id>\d+)/update_seating_order$',
       'connectus.courses.views.update_seating_order'),
+
+    #
+    # File uploads/Assignment submissions
+    #
+    (r'^(?P<course_id>\d+)/gradeables/uploaded/$',
+      'connectus.submissions.views.view_uploaded'),
+    (r'^(?P<course_id>\d+)/gradeables/uploaded/edit/$',
+      'connectus.submissions.views.update_uploaded'),
+    (r'^(?P<course_id>\d+)/submissions/$',
+      'connectus.submissions.views.view_submissions'),
     # (r'^admin/', include(admin.site.urls)),
 )

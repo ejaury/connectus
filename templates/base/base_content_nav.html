@@ -38,6 +38,10 @@
 
     }
 
+    function ajax_submit(url) {
+      $.post(url);
+    }
+
     $.ajaxSetup ({
       cache: false
     });
@@ -69,6 +73,26 @@
           '{% url connectus.courses.views.grades course_id %}', enable_sorting);
       });
 
+      $("#view_gradeables").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.submissions.views.view_uploaded course_id %}', enable_sorting);
+      });
+
+      $("#view_submissions").click(function(){
+        $.ajax({
+          type: 'GET',
+          url: '{% url connectus.submissions.views.view_submissions course_id %}',
+          complete: function(xhr, text_status) {
+            if (xhr.status == '302') {
+              window.location.href = xhr.responseText;
+            }
+          },
+          success: function(response, text_status, xhr) {
+            $('#content_main').html(response);
+          }
+        });
+      });
+
     });
   </script>
 
@@ -91,6 +115,14 @@
       <div id="view_status" class="content_nav_sublinks">
         <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
         <p>Status</p>
+      </div> 
+      <div id="view_gradeables" class="content_nav_sublinks">
+        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
+        <p>Gradeables</p>
+      </div> 
+      <div id="view_submissions" class="content_nav_sublinks">
+        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
+        <p>Submissions</p>
       </div> 
       <div id="view_grades" class="content_nav_sublinks">
         <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 

@@ -1,0 +1,31 @@
+{% load custom_filters %}
+
+{% block content %}
+  <h2>{{ course_title }}</h2>
+  <h3>My Submissions</h3>
+  {% if submissions %}
+    <table id="submissions" border="1">
+      <thead>
+        <tr>
+          <th>Gradeable Name</th>
+          <th>Submitted File</th>
+          <th>Submission Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in submissions %}
+          <tr>
+            <td>{{ item.gradeable.name }}</td>
+            <td>
+              <a href="{{ item.file.url }}">{{ item.file.name|basename }}</a>
+            </td>
+            <td>{{ item.submission_date }}</td>
+          </td>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No submissions found</p>
+  {% endif %}
+{% endblock %}
+

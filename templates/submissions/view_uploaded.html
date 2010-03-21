@@ -1,0 +1,33 @@
+{% load custom_filters %}
+
+{% block content %}
+  <h2>{{ course_title }}</h2>
+  <h3>Uploaded Files</h3>
+  <table id="uploaded_asgn" border="1">
+    <thead>
+      <tr>
+        <th>Gradeable Name</th>
+        <th>File</th>
+        <th>Due Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in uploaded %}
+        <tr>
+          <td>{{ item.gradeable.name }}</td>
+          <td>
+            <a href="{{ item.file.url }}">{{ item.file.name|basename }}</a>
+          </td>
+          <td>{{ item.due_date }}</td>
+        </td>
+      {% endfor %}
+    </tbody>
+  </table>
+  <!--form method="post" action="/courses/{{ course_id }}/gradeables/uploaded/edit/">
+      <table>
+          {{ formset }}
+      </table>
+      <input type="button" value="Submit" 
+             onClick="ajax_submit('/courses/{{ course_id }}/gradeables/uploaded/edit/')"/>
+  </form-->
+{% endblock %}

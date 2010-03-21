@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.forms import ModelForm
 from connectus.grades.models import Gradeable
 
 class GradeableFileUpload(models.Model):
@@ -27,3 +28,7 @@ class StudentSubmission(GradeableFileUpload):
 
 class AssignmentFileUpload(GradeableFileUpload):
   due_date = models.DateTimeField()
+
+class AssignmentFileUploadForm(ModelForm):
+  class Meta:
+    model = AssignmentFileUpload
