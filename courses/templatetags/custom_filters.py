@@ -8,3 +8,11 @@ register = template.Library()
 @stringfilter
 def basename(value):
   return os.path.basename(value)
+
+@register.filter(name='get_value')
+def get_value(value, key):
+  return value.get(key)
+
+@register.filter(name='get_attr')
+def get_attr(value, arg):
+  return value.__getattribute__(arg)

@@ -24,11 +24,13 @@ def view_uploaded(req, course_id):
 
 def view_submissions(req, course_id):
   if req.is_ajax():
-    # only student is allowed to check this
     if req.user.is_authenticated():
       student_group = Group.objects.get(name='Student')
+      teacher_group = Group.objects.get(name='Teacher')
+      course = Course.objects.get(id=course_id)
+
+      # student's view
       if student_group in req.user.groups.all():
-        course = Course.objects.get(id=course_id)
         registrations = CourseRegistration.objects.filter(student__id=req.user.id)
         registered_course_ids = []
         for reg in registrations:
@@ -39,20 +41,43 @@ def view_submissions(req, course_id):
             gradeable__course__id__in=registered_course_ids,
             student__id=req.user.id
           )
-
         template_name = 'submissions/view_submissions.html'
+
+      # teacher's view
+      elif teacher_group in req.user.groups.all():
+        registrations = CourseRegistration.objects.filter(course__id=course_id)
+        gradeables = Gradeable.objects.filter(course__id=course_id)
+        gradeable_names = []
+        for gradeable in gradeables:
+          gradeable_names.append(gradeable.name)
+
+        submitted = \
+          StudentSubmission.objects.filter(gradeable__course__id=course_id)
+        template_name = 'submissions/view_submissions_teacher.html'
+
+        submissions = {}
+        for reg in registrations:
+          student_name = '%s %s' % (reg.student.first_name,
+                                    reg.student.last_name)
+          submissions[student_name] = {}
+
+        for s in submitted:
+          student_name = '%s %s' % (s.student.first_name,
+                                    s.student.last_name)
+          submissions[student_name][s.gradeable.name] = s.file
+
+      return render_to_response(template_name, {
+                                  'course_title': course.title,
+                                  'course_id': course_id,
+                                  'gradeable_names': gradeable_names,
+                                  'submissions': submissions,
+                                },
+                                context_instance=RequestContext(req))
     else:
       # redirect to login page
       # special case: use this method to redirect instead of login_required
       #               decorator when request is ajax
       return HttpResponse('/accounts/login/', status=302)
-
-    return render_to_response(template_name, {
-                                'course_title': course.title,
-                                'course_id': course_id,
-                                'submissions': submissions,
-                              },
-                              context_instance=RequestContext(req))
 
 def update_uploaded(req, course_id):
   FileUploadFormSet = formset_factory(AssignmentFileUploadForm)

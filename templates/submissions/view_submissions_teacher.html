@@ -1,0 +1,35 @@
+{% load custom_filters %}
+
+{% block content %}
+  <h2>{{ course_title }}</h2>
+  <h3>Student Submissions</h3>
+  <table id="student_submissions" border="1">
+    <thead>
+      <tr>
+        <th>Gradeable Name</th>
+        {% for name in gradeable_names %}
+          <th>{{ name }}</th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for student,files in submissions.items %}
+        <tr>
+          <td>{{ student }}</td>
+          {% for name in gradeable_names %}
+            {% if files|get_value:name %}
+              <td>
+                <a href="{{ files|get_value:name|get_attr:'url' }}">
+                  {{ files|get_value:name|basename }}
+                </a>
+              </td>
+            {% else %}
+              <td>N/A</td>
+            {% endif %}
+          {% endfor %}
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
