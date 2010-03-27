@@ -20,7 +20,7 @@
     @import url("/site_media/css/style.css");
     @import url("/site_media/css/data_table.css");
     @import url("/site_media/css/jx.stylesheet.css");
-    @import url("/site_media/css/jquery-ui/jquery-ui.css");
+    @import url("/site_media/css/jquery-ui/ui.all.css");
   </style>
 
   <script type="text/javascript" src="/site_media/js/jquery.js"></script>
@@ -36,8 +36,34 @@
       $("#h_toolbar").jixedbar({
         roundedCorners: true
       });
+
     });
   </script>
+
+	<script type="text/javascript">
+    function goto(url) {
+      window.location.href = url;
+    }
+
+
+    $(function() {
+      $("#sidebar").accordion({
+        collapsible: true,
+        changestart: function(event, ui) {
+           switch ($(ui.newHeader).attr("id")) {
+             case "sidebar_grades":
+                event.stopPropagation();
+                event.preventDefault();
+                $(ui.newHeader).attr("disabled", "disabled");
+                return false;
+               break;
+             case "Language":
+               break;
+           }
+        }
+      });
+    });
+	</script>
 
   <script type="text/javascript">
     var active_color = '#000'; // Colour of user provided text
@@ -72,37 +98,52 @@
 </head>
 
 <body>
+  <div id="header">
+    <div id="logo">
+      <a href="/"><img alt="Connectus" src="/site_media/css/images/logo_small.png"></img></a>
+    </div>
+  </div>
+  <div id="header_bottom">
+    <div id="header_menu">
+      <ul>
+        <li>Home</li>
+        <li>>></li>
+        <li>Classes</li>
+        <li>>></li>
+        <li>Math 1</li>
+      </ul>
+    </div>
+  </div>
   <div id="static-nav"></div>
   <div id="bg_container">
     <div id="page-container">
-      <div id="header">
-        <div id="logo">
-          <a href="/"><img alt="Connectus" src="/site_media/css/images/logo_small.png"></img></a>
-        </div>
-      </div>
       <div id="mid-wrapper">
         <div id="sidebar">
-          <div class="padding">
-            <dl>
-              <dt id="sidebar_calendar">Inbox</dt>
-              <dt id="sidebar_classes">
-                <a href="{% url connectus.courses.views.index %}">Classes</a>
-              </dt>
-                {% for course in courses %}
-                <dd>
-                  <a href="{% url connectus.courses.views.grades course.id %}">
-                    {{ course.title }}
-                  </a>
-                </dd>
-                {% endfor %}
-              <dt id="sidebar_grades">
-                <a href="{% url connectus.grades.views.index %}">Grades</a>
-              </dt>
-              <dt id="sidebar_calendar">
-                <a href="{% url connectus.schedule.views.view %}">Calendar</a>
-              </dt>
-            </dl>
+          <h3 id="sidebar_home"><a href="#">Home</a></h3>
+          <div>asdfasfd</div>
+
+          <h3 id="sidebar_classes">
+            <a href="{% url connectus.courses.views.index %}" onClick="goto(this.href)">Classes</a>
+          </h3>
+          <div>
+            <ul>
+              {% for course in courses %}
+              <li>
+                <a href="{% url connectus.courses.views.grades course.id %}">
+                  {{ course.title }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
           </div>
+
+          <h3 id="sidebar_grades" class="disable_accordion">
+            <a href="{% url connectus.grades.views.index %}" onClick="goto(this.href)">Grades</a>
+          </h3>
+          <div id="testingdd"></div>
+          <h3 id="sidebar_calendar">
+            <a href="{% url connectus.schedule.views.view %}">Calendar</a>
+          </h3>
         </div>
         <div id="content-wrapper">
           {% block content-nav %}

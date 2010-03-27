@@ -42,6 +42,11 @@ def view_submissions(req, course_id):
             student__id=req.user.id
           )
         template_name = 'submissions/view_submissions.html'
+        context_vars = {
+          'course_title': course.title,
+          'course_id': course_id,
+          'submissions': submissions,
+        }
 
       # teacher's view
       elif teacher_group in req.user.groups.all():
@@ -66,12 +71,15 @@ def view_submissions(req, course_id):
                                     s.student.last_name)
           submissions[student_name][s.gradeable.name] = s.file
 
-      return render_to_response(template_name, {
-                                  'course_title': course.title,
-                                  'course_id': course_id,
-                                  'gradeable_names': gradeable_names,
-                                  'submissions': submissions,
-                                },
+        context_vars = {
+          'course_title': course.title,
+          'course_id': course_id,
+          'gradeable_names': gradeable_names,
+          'submissions': submissions,
+        }
+
+      return render_to_response(template_name, 
+                                context_vars,
                                 context_instance=RequestContext(req))
     else:
       # redirect to login page

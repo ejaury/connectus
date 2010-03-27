@@ -1,0 +1,49 @@
+{% block head %}
+  <script type="text/javascript">
+    /* 
+       TODO: May not be the most efficient way.
+             Should ignore td hover.
+    */
+    var oTable;
+
+    $(document).ready(function() {
+      $('#grades tbody td').hover( function() {
+        var iCol = $('td').index(this) % ({{ gradeables_length }} + 1);
+        var nTrs = oTable.fnGetNodes();
+        $('td:nth-child('+(iCol+1)+')', nTrs).addClass( 'highlighted' );
+      }, function() {
+        var nTrs = oTable.fnGetNodes();
+        $('td.highlighted', nTrs).removeClass('highlighted');
+      } );
+      
+      oTable = $('#grades').dataTable( {
+        "bSortClasses": false
+      } );
+    } );
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h2>{{ course_title }}</h2>
+
+  {% if grades %}
+    <table id="grades" class="display">
+      <thead>
+        <tr>
+          <th>Gradeable Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for grade in grades %}
+          <tr>
+            <td>{{ grade.gradeable.name }}</td>
+            <td>{{ grade.score }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+      <p>No grades are available.</p>
+  {% endif %}
+{% endblock %}

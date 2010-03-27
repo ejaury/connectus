@@ -52,7 +52,7 @@
       // Default action
       $(function() {
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.view_seating_plan course_id %}', enable_sorting);
+          '{{ default_url }}', enable_sorting);
       });
 
       $("#thumb_view").click(function(){
@@ -68,9 +68,15 @@
         $("#content_main").html(ajax_load).load(
           '{% url connectus.courses.views.attendance course_id %}', enable_sorting);
       });
+
       $("#view_grades").click(function(){
         $("#content_main").html(ajax_load).load(
           '{% url connectus.courses.views.grades course_id %}', enable_sorting);
+      });
+
+      $("#view_own_grades").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.view_own_grades course_id %}', enable_sorting);
       });
 
       $("#view_gradeables").click(function(){
@@ -112,26 +118,12 @@
 {% block content-nav %}
   <div id="content-nav">
     <div id="content_nav_sublinks">
-      <div id="view_status" class="content_nav_sublinks">
-        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
-        <p>Status</p>
-      </div> 
-      <div id="view_gradeables" class="content_nav_sublinks">
-        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
-        <p>Gradeables</p>
-      </div> 
-      <div id="view_submissions" class="content_nav_sublinks">
-        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
-        <p>Submissions</p>
-      </div> 
-      <div id="view_grades" class="content_nav_sublinks">
-        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
-        <p>Grades</p>
-      </div>
-      <div id="view_attendance" class="content_nav_sublinks">
-        <img src="/site_media/css/images/thumb_view.png" alt="Thumbnail View" width="45" height="45"/> 
-        <p>Attendance</p>
-      </div>
+      {% for action_title,action in permitted_actions.items %}
+        <div id="{{ action.id }}" class="content_nav_sublinks">
+          <img src="/site_media/css/images/{{ action.icon_path }}" alt="{{ action_title }}" width="45" height="45"/>
+          <p>{{ action_title }}</p>
+        </div>
+      {% endfor %}
     </div>
     <div id="content_nav_view">
       <img id="thumb_view" src="/site_media/css/images/thumb_view.png" title="Switch to Thumbnail View" alt="Thumbnail View" width="25" height="25"/>

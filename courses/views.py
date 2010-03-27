@@ -2,10 +2,11 @@ import datetime
 import json
 import random
 from copy import deepcopy
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from connectus.app_helper.helper import DateForm
+from connectus.app_helper.helper import DateForm, NavigationTree
 from connectus.courses.models import Course, CourseRegistration, Attendance
 from connectus.grades.models import Grade, GradeForm
 from connectus.user_info.models import UserProfile
@@ -14,6 +15,22 @@ def index(req):
   all_courses = Course.objects.all().order_by('-id')
   return render_to_response('courses/index.html',
                             { 'all_courses': all_courses },
+                            context_instance=RequestContext(req))
+
+@login_required
+def detail(req, course_id):
+  default = 'view_seating_plan'
+  default_url = '/courses/%s/%s/' % (course_id, default)
+  course = Course.objects.get(id=course_id)
+  #TODO: change default by passing view name through GET param
+  permitted_actions = NavigationTree.get_class_detail(req.user.groups.all())
+  print permitted_actions
+  return render_to_response('courses/grades.html', {
+                              'course_id': course_id,
+                              'course_title': course.title,
+                              'default_url': default_url,
+                              'permitted_actions': permitted_actions,
+                            },
                             context_instance=RequestContext(req))
 
 def grades(req, course_id):
@@ -65,6 +82,23 @@ def grades(req, course_id):
   return render_to_response(template_path,
                             context_data,
                             context_instance=RequestContext(req))
+
+@login_required
+def view_own_grades(req, course_id):
+  course = Course.objects.get(id=course_id)
+
+  if req.is_ajax():
+    groups = req.user.groups.all()
+    if groups and groups[0].name == 'Student':
+      grades = Grade.objects.filter(gradeable__course__id=course_id,
+                                    student__id=req.user.id) 
+      print grades
+      return render_to_response('courses/view_own_grades.html', {
+                                  'course_id': course_id,
+                                  'course_title': course.title,
+                                  'grades': grades,
+                                },
+                                context_instance=RequestContext(req))
 
 def view_seating_plan(req, course_id):
   profile_img_basepath = UserProfile.IMAGE_BASE_PATH

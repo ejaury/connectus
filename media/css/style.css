@@ -53,18 +53,45 @@ table.course {
 }
 
 #header {
-  background: black
-              url("images/header_blank.jpg");
-  height: 200px;
+  background: black url("images/header_bg.jpg") repeat-x top left;
   color: white;
+  height: 100px;
+}
+
+#header_bottom {
+  background-color: #505050;
+  color: white;
+  font-size: large;
+  height: 50px;
+}
+
+#header_menu {
+  background: #006699;
+  height: 50px;
+  margin: auto;
+  width: 960px;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
+}
+
+#header_menu ul {
+  float: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#header_menu li {
+  float: left;
+  padding: 12px 0 0 15px;
 }
 
 #header #logo {
   margin: 0;
   padding: 0;
-  float: left;
-  margin-top: 23px;
-  padding-left: 26px;
+  margin: auto;
+  padding-left: 20px;
+  width: 960px;
 }
 
 #mid-wrapper {
