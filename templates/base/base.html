@@ -122,7 +122,9 @@
       <div id="mid-wrapper">
         <div id="sidebar">
           <ul>
-            <li id="sidebar_home"><a href="#">Home</a></li>
+            <li id="sidebar_home">
+              <a href="#">Home</a>
+            </li>
 
             <li id="sidebar_classes">
               <a href="{% url connectus.courses.views.index %}" onClick="goto(this.href)">Classes</a>
@@ -133,7 +135,10 @@
                 {% for course in courses %}
                 <li>
                   <a href="{% url connectus.courses.views.detail course.id %}">
-                    {{ course.title }}
+                  {% if course.icon_path %}
+                    <img src="/site_media/css/images/{{ course.icon_path }}" width=20 height=20/>
+                  {% endif %}
+                  {{ course.title }}
                   </a>
                 </li>
                 {% endfor %}

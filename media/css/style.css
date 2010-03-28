@@ -96,6 +96,7 @@ table.course {
 
 #mid-wrapper {
   background: #333333;
+  min-height: 960px;
 } 
 
 #sidebar {
@@ -156,7 +157,11 @@ table.course {
 #sidebar_level2 li {
   border-bottom: #AA7700 dotted 0.5px;
   font-size: small;
-  line-height: 20px;
+  line-height: 25px;
+}
+
+#sidebar_level2 img {
+  vertical-align: middle;
 }
 
 #toolbar {
@@ -173,7 +178,7 @@ table.course {
 #content-wrapper {
   background: white;
   margin-left: 220px;
-  min-height: 750px;
+  min-height: 960px;
 }
 
 #content_header h2 {
