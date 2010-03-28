@@ -1,9 +1,11 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from connectus.app_helper.helper import LoginForm
 
+@login_required
 def index(req):
   return render_to_response('main/index.html',
                             context_instance=RequestContext(req))
