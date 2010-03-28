@@ -113,6 +113,10 @@ table.course {
   font-weight: bold;
 }
 
+#sidebar img {
+  vertical-align: middle;
+}
+
 #sidebar ul {
   list-style-type: none;
   margin: 0;
@@ -120,8 +124,13 @@ table.course {
 }
 
 #sidebar li {
+  background-color: #404040;
   line-height: 30px;
+  margin: 8px 0 0;
   padding: 0 10px;
+  text-shadow: 2px 2px 3px #222222;
+  -webkit-box-shadow: 1px 1px 3px #777777;
+  -moz-box-shadow: 1px 1px 3px #777777;
 }
 
 #sidebar li:hover {
@@ -147,7 +156,7 @@ table.course {
 }
 
 #sidebar_level2 ul {
-  padding-top: 0; 
+  padding: 0 15px 0 25px; 
 }
 
 #sidebar_level2 a {
@@ -155,13 +164,13 @@ table.course {
 }
 
 #sidebar_level2 li {
+  background-color: #333333;
   border-bottom: #AA7700 dotted 0.5px;
   font-size: small;
   line-height: 25px;
-}
-
-#sidebar_level2 img {
-  vertical-align: middle;
+  margin: 2px 0 0;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
 }
 
 #toolbar {

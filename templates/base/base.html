@@ -122,37 +122,35 @@
       <div id="mid-wrapper">
         <div id="sidebar">
           <ul>
-            <li id="sidebar_home">
-              <a href="#">Home</a>
-            </li>
-
-            <li id="sidebar_classes">
-              <a href="{% url connectus.courses.views.index %}" onClick="goto(this.href)">Classes</a>
-            </li>
-
-            <div id="sidebar_level2">
-              <ul>
+            {% for menu in menus %}
+              <li id="{{ menu.1.id }}">
+                <a href="{{ menu.1.url }}">
+                  <img src="/site_media/css/images/{{ menu.1.icon_path }}" width="25" height="25">
+                  {{ menu.0 }}
+                  </img>
+                </a>
+              </li>
+              
+              {% ifequal menu.0 "Classes" %}
+                <div id="sidebar_level2">
+                <ul>
                 {% for course in courses %}
-                <li>
-                  <a href="{% url connectus.courses.views.detail course.id %}">
-                  {% if course.icon_path %}
-                    <img src="/site_media/css/images/{{ course.icon_path }}" width=20 height=20/>
-                  {% endif %}
-                  {{ course.title }}
-                  </a>
-                </li>
+                  <li>
+                    <a href="/courses/{{ course.id }}">
+                      {% if course.icon_path %}
+                        <img src="/site_media/css/images/{{ course.icon_path }}" width=20 height=20/>
+                      {% endif %}
+                      {{ course.title }}
+                    </a>
+                  </li>
                 {% endfor %}
-              </ul>
-            </div>
-
-            <li id="sidebar_grades" class="disable_accordion">
-              <a href="{% url connectus.grades.views.index %}" onClick="goto(this.href)">Grades</a>
-            </li>
-            <li id="sidebar_calendar" class="selected">
-              <a href="{% url connectus.schedule.views.view %}">Calendar</a>
-            </li>
+                </ul>
+                </div>
+              {% endifequal %}
+            {% endfor %}
           </ul>
         </div>
+
         <div id="content-wrapper">
           {% block content_header %}
           {% endblock %}

@@ -9,6 +9,24 @@ class LoginForm(forms.Form):
 
 # Hardcoded navigation tree - this should've been in DB
 class NavigationTree():
+  main_navi = (
+    ('Home', {
+      'id': 'sidebar_home',
+      'icon_path': 'home.png',
+      'url': '/',
+    }),
+    ('Classes', {
+      'id': 'sidebar_class',
+      'icon_path': 'class.png',
+      'url': '/courses',
+    }),
+    ('Calendar', {
+      'id': 'sidebar_calendar',
+      'icon_path': 'calendar.png',
+      'url': '/schedule/view',
+    })
+  )
+
   teacher_class_detail = {
     'Attendance': {
       'id': 'view_attendance',
@@ -42,6 +60,16 @@ class NavigationTree():
       'icon_path': 'submissions.png',
     },
   }
+
+  @staticmethod
+  def get_main_navi(group):
+    if group:
+      if group[0].name == 'Teacher':
+        return NavigationTree.main_navi
+      elif group[0].name == 'Student':
+        return NavigationTree.main_navi
+    else:
+      return None
 
   @staticmethod
   def get_class_detail(group):
