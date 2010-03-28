@@ -46,6 +46,10 @@ table.course {
   padding: 0;
 }
 
+#content #class_list p {
+  padding: 0;
+}
+
 #page-container {
   /* center this div */
   margin: auto;
@@ -343,11 +347,13 @@ table.course {
 
 #class_list a {
   color: gray;
+  display: block;
 }
 
 #class_list a:hover {
+  border-bottom: #006699 solid 3px;
   color: black;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #class_list div.class_thumb {
