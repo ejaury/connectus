@@ -100,8 +100,37 @@
 </head>
 
 <body>
+  <div id="header_userinfo">
+  </div>
   <div id="header">
     <div id="logo">
+      <div id="user_info">
+        <ul>
+          <li>
+            {% if not user.is_anonymous %}
+              <a href="/accounts/logout">Logout</a>
+            {% else %}
+              <a href="/accounts/login">Login</a>
+            {% endif %}
+          </li>
+          {% if not user.is_anonymous %}
+            <li class="left_separator"/>
+            <li>
+              <a href="#">
+                <img src="/site_media/css/images/user_profile.png" width=18 height=18/>
+                Edit Profile
+              </a>
+            </li>
+            <li class="no_bg">
+              {% if user.first_name and user.last_name %}
+                {{ user.first_name }} {{ user.last_name }}
+              {% else %}
+                { user.username }}
+              {% endif %}
+            </li>
+          {% endif %}
+        </ul>
+      </div>
       <a href="/"><img alt="Connectus" src="/site_media/css/images/logo_small.png"></img></a>
     </div>
   </div>

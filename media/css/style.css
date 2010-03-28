@@ -5,7 +5,7 @@ html, body {
 }
 
 body {
-  background: white url('images/body-bg.gif') repeat-x top left;
+  background: white;
   font-family: "Myriad Pro", Verdana, Helvetica, Arial, Sans-serif;
   font-size: 11pt;
 }
@@ -22,6 +22,7 @@ h1 {
 
 a img {
   border: none;
+  vertical-align: middle;
 }
 
 table.course {
@@ -56,6 +57,7 @@ table.course {
   background: black url("images/header_bg.jpg") repeat-x top left;
   color: white;
   height: 100px;
+  min-width: 980px;
 }
 
 #header_bottom {
@@ -90,8 +92,61 @@ table.course {
   margin: 0;
   padding: 0;
   margin: auto;
-  padding-left: 20px;
+  padding: 0 20px;
   width: 960px;
+}
+
+#header_userinfo {
+  float: right;
+}
+
+#header #user_info {
+  margin: auto;
+}
+
+#header #user_info ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#header #user_info li {
+  background: #CCCCCC;
+  float: right;
+  font-size: small;
+  line-height: 20px;
+  padding: 0 10px;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
+}
+
+#header #user_info li.no_bg {
+  background: none;
+  font-weight: bold;
+  font-size: medium;
+}
+
+#header #user_info li.no_bg:hover {
+  background: none;
+}
+
+#header #user_info li.left_separator {
+  border-left: #999999 solid 2px;
+  height: 20px;
+  padding:  0;
+}
+
+#header #user_info li a {
+  color: white;
+  display: block;
+}
+
+#header #user_info li:hover {
+  background-color: white;
+}
+
+#header #user_info li:hover a {
+  color: #444444;
 }
 
 #mid-wrapper {
