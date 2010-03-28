@@ -46,6 +46,7 @@
     }
 
 
+    /*
     $(function() {
       $("#sidebar").accordion({
         collapsible: true,
@@ -63,6 +64,7 @@
         }
       });
     });
+    */
 	</script>
 
   <script type="text/javascript">
@@ -119,33 +121,36 @@
     <div id="page-container">
       <div id="mid-wrapper">
         <div id="sidebar">
-          <h3 id="sidebar_home"><a href="#">Home</a></h3>
-          <div>asdfasfd</div>
+          <ul>
+            <li id="sidebar_home"><a href="#">Home</a></li>
 
-          <h3 id="sidebar_classes">
-            <a href="{% url connectus.courses.views.index %}" onClick="goto(this.href)">Classes</a>
-          </h3>
-          <div>
-            <ul>
-              {% for course in courses %}
-              <li>
-                <a href="{% url connectus.courses.views.grades course.id %}">
-                  {{ course.title }}
-                </a>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
+            <li id="sidebar_classes">
+              <a href="{% url connectus.courses.views.index %}" onClick="goto(this.href)">Classes</a>
+            </li>
 
-          <h3 id="sidebar_grades" class="disable_accordion">
-            <a href="{% url connectus.grades.views.index %}" onClick="goto(this.href)">Grades</a>
-          </h3>
-          <div id="testingdd"></div>
-          <h3 id="sidebar_calendar">
-            <a href="{% url connectus.schedule.views.view %}">Calendar</a>
-          </h3>
+            <div id="sidebar_level2">
+              <ul>
+                {% for course in courses %}
+                <li>
+                  <a href="{% url connectus.courses.views.detail course.id %}">
+                    {{ course.title }}
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <li id="sidebar_grades" class="disable_accordion">
+              <a href="{% url connectus.grades.views.index %}" onClick="goto(this.href)">Grades</a>
+            </li>
+            <li id="sidebar_calendar" class="selected">
+              <a href="{% url connectus.schedule.views.view %}">Calendar</a>
+            </li>
+          </ul>
         </div>
         <div id="content-wrapper">
+          {% block content_header %}
+          {% endblock %}
           {% block content-nav %}
           {% endblock %}
           <div id="content">

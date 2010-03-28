@@ -106,6 +106,59 @@ table.course {
   width: 220px;
 }
 
+#sidebar a {
+  color: #FFCC33;
+  display: block;
+  font-weight: bold;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 15px 0 15px;
+}
+
+#sidebar li {
+  line-height: 30px;
+  padding: 0 10px;
+}
+
+#sidebar li:hover {
+  background-color: #555555;
+  border-left: white solid 3px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+#sidebar li a:hover {
+  color: orange;
+}
+
+#sidebar li.selected {
+  background-color: #0088DD;
+  border: none;
+  -webkit-border-radius: 0 10px 10px 0;
+  -moz-border-radius: 0 10px 10px 0;
+}
+
+#sidebar li.selected a {
+  color: white;
+}
+
+#sidebar_level2 ul {
+  padding-top: 0; 
+}
+
+#sidebar_level2 a {
+  font-weight: normal;
+}
+
+#sidebar_level2 li {
+  border-bottom: #AA7700 dotted 0.5px;
+  font-size: small;
+  line-height: 20px;
+}
+
 #toolbar {
   background: transparent url("/site_media/css/images/bottom_bar.png") no-repeat scroll;
   line-height: 35px;
@@ -118,15 +171,20 @@ table.course {
 }
 
 #content-wrapper {
-  background: #FFFFEE;
+  background: white;
   margin-left: 220px;
   min-height: 750px;
+}
+
+#content_header h2 {
+  margin: 0 10px;
+  padding: 10px 0;
 }
 
 #content-nav {
   color: red;
   border-bottom: 2px solid #eeeeee;
-  line-height: 30px;
+  line-height: 50px;
   margin: 0 10px 0;
 }
 
@@ -143,16 +201,37 @@ table.course {
 */
 }
 
+#content_nav_sublinks ul {
+  float: left;
+  list-style-type: none;
+  margin: 5px 0;
+  padding: 0;
+}
+
 #content_nav_sublinks .content_nav_sublinks {
-  color: gray;
-  float: right;
-  margin-right: 10px;
-  padding-top: 10px;
+  color: #BBBBBB;
+  display: inline;
+  float: left;
+  line-height: 33px;
+  padding: 0 8px;
   text-align: center;
 }
 
+#content_nav_sublinks .content_nav_sublinks p {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
 #content_nav_sublinks .content_nav_sublinks img {
-  padding: 0 15px;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+#content_nav_sublinks .content_nav_sublinks:hover {
+  color: #333333;
+  cursor: pointer;
 }
 
 #content_nav_view {
