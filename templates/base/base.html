@@ -1,3 +1,5 @@
+{% load custom_filters %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
@@ -169,7 +171,12 @@
                 <div id="sidebar_level2">
                 <ul>
                 {% for course in courses %}
-                  <li>
+                  <li id="view_course_{{ course.id }}"
+                    {% ifequal selected_id 'view_course_'|concat:course.id %}
+                      class="selected">
+                    {% else %}
+                      >
+                    {% endifequal %}
                     <a href="/courses/{{ course.id }}">
                       {% if course.icon_path %}
                         <img src="/site_media/css/images/{{ course.icon_path }}" width=20 height=20/>

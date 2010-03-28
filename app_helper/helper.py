@@ -89,6 +89,8 @@ class ViewMenuMapping:
     'connectus.main.views.index': 'sidebar_home',
     'connectus.courses.views.index': 'sidebar_class',
     'connectus.schedule.views.view': 'sidebar_calendar',
+    'connectus.courses.views.detail': 'view_course_',
+    'connectus.courses.views.view_seating_plan': 'view_course_',
   }
 
 class Util:

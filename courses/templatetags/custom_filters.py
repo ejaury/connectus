@@ -16,3 +16,7 @@ def get_value(value, key):
 @register.filter(name='get_attr')
 def get_attr(value, arg):
   return value.__getattribute__(arg)
+
+@register.filter(name='concat')
+def concat(value, arg):
+  return str(value) + str(arg)
