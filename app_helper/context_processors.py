@@ -1,5 +1,5 @@
-from django.core.urlresolvers import reverse
-from connectus.app_helper.helper import NavigationTree
+from django.core.urlresolvers import reverse, resolve
+from connectus.app_helper.helper import NavigationTree, Util, ViewMenuMapping
 from connectus.courses.models import Course, CourseRegistration
 
 def sidebar(request):
@@ -29,4 +29,13 @@ def sidebar(request):
   return {
     'courses': courses,
     'menus': menus
+  }
+
+def navigation_view_solver(request):
+  selected_css_class = 'selected'
+  view_func, args, kwargs = resolve(request.path)
+  view_name = Util.construct_module_name(view_func)
+  selected_id = ViewMenuMapping.mapping.get(view_name)
+  return {
+    'selected_id': selected_id
   }

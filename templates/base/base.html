@@ -125,7 +125,7 @@
               {% if user.first_name and user.last_name %}
                 {{ user.first_name }} {{ user.last_name }}
               {% else %}
-                { user.username }}
+                {{ user.username }}
               {% endif %}
             </li>
           {% endif %}
@@ -152,7 +152,12 @@
         <div id="sidebar">
           <ul>
             {% for menu in menus %}
-              <li id="{{ menu.1.id }}">
+              <li id="{{ menu.1.id }}"
+                {% ifequal selected_id menu.1.id %}
+                  class="selected">
+                {% else %}
+                  >
+                {% endifequal %}
                 <a href="{{ menu.1.url }}">
                   <img src="/site_media/css/images/{{ menu.1.icon_path }}" width="25" height="25">
                   {{ menu.0 }}

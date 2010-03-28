@@ -80,3 +80,25 @@ class NavigationTree():
         return NavigationTree.teacher_class_detail
     else:
       return None
+
+class ViewMenuMapping:
+  # available options in main menu
+  # pair of view name and HTML list id
+  # the list id MUST match those defined in NavigationTree
+  mapping = {
+    'connectus.main.views.index': 'sidebar_home',
+    'connectus.courses.views.index': 'sidebar_class',
+    'connectus.schedule.views.view': 'sidebar_calendar',
+  }
+
+class Util:
+  @staticmethod
+  def construct_module_name(function):
+    try:
+      name = '%s.%s' % (function.__module__, function.func_name)
+    except:
+      # presumably, this is a CheckLogin obj
+      # retrieve func name first
+      function = function.view_func
+      name = '%s.%s' % (function.__module__, function.func_name)
+    return name

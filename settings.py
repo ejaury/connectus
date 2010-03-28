@@ -97,7 +97,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     # This will be used in Django 1.2 onwards
     # For now, auth will provide this message processor
     #"django.contrib.messages.context_processors.messages",
-    "connectus.app_helper.context_processors.sidebar"
+    "connectus.app_helper.context_processors.sidebar",
+    "connectus.app_helper.context_processors.navigation_view_solver"
 )
 
 AUTH_PROFILE_MODULE = 'user_info.UserProfile'
