@@ -90,7 +90,11 @@ class ViewMenuMapping:
     'connectus.courses.views.index': 'sidebar_class',
     'connectus.schedule.views.view': 'sidebar_calendar',
     'connectus.courses.views.detail': 'view_course_',
+    'connectus.courses.views.attendance': 'view_course_',
+    'connectus.courses.views.grades': 'view_course_',
     'connectus.courses.views.view_seating_plan': 'view_course_',
+    'connectus.submissions.views.view_uploaded': 'view_course_',
+    'connectus.submissions.views.view_submissions': 'view_course_',
   }
 
 class Util:
