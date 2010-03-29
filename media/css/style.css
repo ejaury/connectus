@@ -275,17 +275,27 @@ table.course {
 }
 
 #content_nav_sublinks ul {
+  color: gray;
   float: left;
   list-style-type: none;
   margin: 5px 0;
   padding: 0;
 }
 
+#content_nav_sublinks li:hover,
+#content_nav_sublinks li.selected {
+  background-color: #DBF1FF;
+  border-bottom: #DBF1FF solid 2px;
+  color: #0068A8;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+
 #content_nav_sublinks .content_nav_sublinks {
-  color: #BBBBBB;
   display: inline;
   float: left;
   line-height: 33px;
+  margin-right: 5px;
   padding: 0 8px;
   text-align: center;
 }
@@ -303,7 +313,6 @@ table.course {
 }
 
 #content_nav_sublinks .content_nav_sublinks:hover {
-  color: #333333;
   cursor: pointer;
 }
 

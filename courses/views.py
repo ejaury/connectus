@@ -3,6 +3,7 @@ import json
 import random
 from copy import deepcopy
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
@@ -19,8 +20,7 @@ def index(req):
 
 @login_required
 def detail(req, course_id):
-  default = 'view_seating_plan'
-  default_url = '/courses/%s/%s/' % (course_id, default)
+  default_url = reverse('connectus.courses.views.grades', args=[course_id])
   course = Course.objects.get(id=course_id)
   #TODO: change default by passing view name through GET param
   permitted_actions = NavigationTree.get_class_detail(req.user.groups.all())
