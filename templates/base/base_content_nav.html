@@ -84,6 +84,11 @@
           '{% url connectus.submissions.views.view_uploaded course_id %}', enable_sorting);
       });
 
+      $("#view_seating_plan").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.courses.views.view_seating_plan course_id %}', enable_sorting);
+      });
+
       $("#view_submissions").click(function(){
         $.ajax({
           type: 'GET',
@@ -114,20 +119,23 @@
   </style>
 {% endblock %}
 
+{% block content_header %}
+  <div id="content_header">
+    <h2>{{ course_title }}</h2>
+  </div>
+{% endblock %}
 
 {% block content-nav %}
   <div id="content-nav">
     <div id="content_nav_sublinks">
+      <ul>
       {% for action_title,action in permitted_actions.items %}
-        <div id="{{ action.id }}" class="content_nav_sublinks">
-          <img src="/site_media/css/images/{{ action.icon_path }}" alt="{{ action_title }}" width="45" height="45"/>
+        <li id="{{ action.id }}" class="content_nav_sublinks">
+          <img src="/site_media/css/images/{{ action.icon_path }}" alt="{{ action_title }}" width="30" height="30"/>
           <p>{{ action_title }}</p>
-        </div>
+        </li>
       {% endfor %}
-    </div>
-    <div id="content_nav_view">
-      <img id="thumb_view" src="/site_media/css/images/thumb_view.png" title="Switch to Thumbnail View" alt="Thumbnail View" width="25" height="25"/>
-      <img id="detail_view" src="/site_media/css/images/detail_view.png" title="Switch to Detail View" alt="Detail View" width="25" height="25"/>
+      </ul>
     </div>
     <br/>
   </div>
