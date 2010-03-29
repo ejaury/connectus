@@ -3,6 +3,7 @@ import json
 import random
 from copy import deepcopy
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
@@ -20,11 +21,15 @@ def index(req):
 
 @login_required
 def detail(req, course_id):
-  default_url = reverse('connectus.courses.views.grades', args=[course_id])
+  default_url = reverse('connectus.courses.views.grades',
+                        args=[course_id])
+  if __is_in_group(req.user, 'Student'):
+    default_url = reverse('connectus.courses.views.view_own_grades', 
+                          args=[course_id])
+
   course = Course.objects.get(id=course_id)
   #TODO: change default by passing view name through GET param
   permitted_actions = NavigationTree.get_class_detail(req.user.groups.all())
-  print permitted_actions
   return render_to_response('courses/grades.html', {
                               'course_id': course_id,
                               'course_title': course.title,
@@ -237,6 +242,10 @@ def update_seating_order(req, course_id):
       course.save()
 
     return HttpResponse()
+
+def __is_in_group(user, group_name):
+  group = Group.objects.get(name=group_name)
+  return group in user.groups.all()
 
 def __user_tuple_compare(a, b):
   x = '%s %s' % (a[0].first_name, a[0].last_name)

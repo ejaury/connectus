@@ -115,7 +115,7 @@ table.course {
 }
 
 #header #user_info li {
-  background: #CCCCCC;
+  background-color: white;
   float: right;
   font-size: small;
   line-height: 20px;
@@ -141,16 +141,16 @@ table.course {
 }
 
 #header #user_info li a {
-  color: white;
+  color: black;
   display: block;
 }
 
 #header #user_info li:hover {
-  background-color: white;
+  background-color: #555555;
 }
 
 #header #user_info li:hover a {
-  color: #444444;
+  color: white;
 }
 
 #mid-wrapper {
