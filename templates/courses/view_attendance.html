@@ -1,9 +1,7 @@
 {% block content %}
   {% if not update %}
-    <h2>{{ course_title }} Attendance</h2>
-
     <form id="change_date_form" action="/courses/{{ course_id }}/attendance/" method="post">
-      <label for="id_date">Date:</label>
+      <label for="id_date">Go to Date:</label>
       <input type="text" id="id_date" name="date">
     </form>
   {% endif %}
