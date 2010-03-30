@@ -14,7 +14,7 @@ class Gradeable(models.Model):
     return '%s - %s' % (self.course.title, self.name)
 
 class Grade(models.Model):
-  comment = models.CharField(max_length=250, null=True)
+  comment = models.CharField(max_length=250, blank=True, null=True)
   score = models.FloatField()
   gradeable = models.ForeignKey(Gradeable)
   student = models.ForeignKey(User)
