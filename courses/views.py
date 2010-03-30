@@ -1,16 +1,17 @@
 import datetime
 import json
 import random
+import re
 from copy import deepcopy
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from connectus.app_helper.helper import DateForm, NavigationTree
 from connectus.courses.models import Course, CourseRegistration, Attendance
-from connectus.grades.models import Grade, GradeForm
+from connectus.grades.models import Grade, Gradeable, GradeForm
 from connectus.user_info.models import UserProfile
 
 def index(req):
@@ -220,13 +221,25 @@ def attendance(req, course_id):
 
 def update_grades(req, course_id):
   if req.method == 'POST':
-    grade = Grade.objects.get(id=req.POST['id'])
-
-    if grade:
+    try:
+      ids = req.POST['id'].split('-')
+      grade_id = re.findall('[\d]+$', ids[2])[0]
+      grade = Grade.objects.get(id=grade_id)
       grade.score = req.POST['value']
       grade.save()
 
-      return HttpResponse(float(grade.score))
+    except:
+      # grade doesn't exist yet, create one
+      uid = ids[0].strip('uid_')
+      student = User.objects.get(id=uid)
+      gradeable_id = ids[1].strip('gradeable_')
+      gradeable = Gradeable.objects.get(id=gradeable_id)
+      grade = Grade(student=student,
+                    gradeable=gradeable,
+                    score=req.POST['value'])
+      grade.save()
+
+    return HttpResponse(float(grade.score))
 
 def update_seating_order(req, course_id):
   if req.is_ajax():
