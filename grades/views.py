@@ -46,6 +46,12 @@ def edit(req, grade_id):
                             },
                             context_instance=RequestContext(req))
 
+def delete(req, grade_id):
+  grade = get_object_or_404(Grade, pk=grade_id)
+  grade.delete()
+  coming_from = req.META['HTTP_REFERER']
+  return HttpResponseRedirect(coming_from) 
+
 def list_by_course(req, course_id):
   course_obj = Course.objects.get(id=course_id)
   grades_by_course = Grade.objects.filter(course=course_obj).order_by('-id')

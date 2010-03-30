@@ -35,6 +35,10 @@ table.course {
   display: none;
 }
 
+#add_action {
+  float: right;
+}
+
 #bg_container {
   background:  url("/site_media/css/images/bg_shadow.png") repeat-y;
   margin: auto;
@@ -447,6 +451,23 @@ span#tb_login {
   font-size: 10pt;
   font-weight: bold;
   margin-right: 20px;
+}
+
+.button {
+  background-color: beige; 
+  border: #8AB9FF solid 1px;
+  color: #006699;
+  font-size: small;
+  font-weight: bold;
+  padding: 5px;
+  vertical-align: middle;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+.button:hover {
+  background-color: #0088CC;
+  color: beige;
 }
 
 /*

@@ -36,8 +36,7 @@
           $("#change_date_form").submit();
         }
       });
-
-    }
+    };
 
     var selection_wrapper = function(remove_selector, this_element_id) {
       jQuery(function($) {
@@ -47,8 +46,11 @@
         $(this_element_id).addClass("selected");
       });
 
-      return enable_sorting();
+      return function() {
+        enable_sorting();
+      };
     };
+
 
     function ajax_submit(url) {
       $.post(url);
