@@ -1,8 +1,10 @@
+from django.core.urlresolvers import reverse, resolve
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from connectus.grades.models import Grade, GradeForm
 from connectus.courses.models import Course
+from urlparse import urlparse
 
 def index(req):
   all_grades = Grade.objects.all().order_by('-id')
@@ -16,7 +18,11 @@ def add(req):
     # TODO: Validate form better here
     if form.is_valid():
       form.save()
-      return HttpResponseRedirect('/grades/')
+      # assuming we're coming from a course page
+      referer = req.META['HTTP_REFERER']
+      path = urlparse(referer).path
+      redirect_url = referer + '?url=%sgrades/' % path
+      return HttpResponseRedirect(redirect_url)
   else:
     form = GradeForm()
 

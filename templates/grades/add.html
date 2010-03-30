@@ -1,4 +1,6 @@
-<form action="/grades/add/" method="post">
-{{ form.as_p }}
-<input type="submit" value="Submit" />
-</form>
+{% block content %}
+  <form action="/grades/add/" method="post">
+  {{ form.as_p }}
+  <input type="submit" value="Submit" />
+  </form>
+{% endblock %}

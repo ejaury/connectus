@@ -19,11 +19,23 @@
       oTable = $('#grades').dataTable( {
         "bSortClasses": false
       } );
+
+      /* Add action */
+      var ajax_load = "<img src='/site_media/css/images/loading.gif' alt='loading...' />";
+
+      $("#add_grade").click(function(){
+        $("#content_main").html(ajax_load).load(
+          '{% url connectus.grades.views.add %}', enable_sorting);
+      });
     } );
   </script>
 {% endblock %}
 
 {% block content %}
+  <div id="add_grade">
+    <img src="/site_media/css/images/add.png" width="20" height="20">Add new</img>
+  </div>
+
   {% if all_gradeables %}
     <table id="grades" class="display">
       <thead>

@@ -22,11 +22,13 @@ def index(req):
 
 @login_required
 def detail(req, course_id):
-  default_url = reverse('connectus.courses.views.grades',
-                        args=[course_id])
-  if __is_in_group(req.user, 'Student'):
-    default_url = reverse('connectus.courses.views.view_own_grades', 
+  default_url = req.GET.get('url')
+  if not default_url:
+    default_url = reverse('connectus.courses.views.grades',
                           args=[course_id])
+    if __is_in_group(req.user, 'Student'):
+      default_url = reverse('connectus.courses.views.view_own_grades',
+                            args=[course_id])
 
   course = Course.objects.get(id=course_id)
   #TODO: change default by passing view name through GET param
