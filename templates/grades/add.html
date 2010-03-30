@@ -1,6 +1,18 @@
+{% block head %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#validated_form").validationEngine();
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
-  <form action="/grades/add/" method="post">
-  {{ form.as_p }}
+  <h3>Add New Grade</h3>
+
+  <form id="validated_form" action="/grades/add/" method="post">
+    <table>
+      {{ form.as_table }}
+    </table>
   <input type="submit" value="Submit" />
   </form>
 {% endblock %}

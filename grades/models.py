@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.forms import ModelForm
 from django.contrib.auth.models import User
@@ -28,3 +29,10 @@ class GradeForm(ModelForm):
   class Meta:
     model = Grade
 
+  def __init__(self, *args, **kwargs):
+    super(ModelForm, self).__init__(*args, **kwargs)
+    # add CSS class for client-side validation
+    self.fields['score'].widget.attrs['class'] = \
+      'validate[required,custom[onlyNumber],length[0,5]]'
+    self.fields['gradeable'].widget.attrs['class'] = 'validate[required]'
+    self.fields['student'].widget.attrs['class'] = 'validate[required]'
