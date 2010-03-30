@@ -97,6 +97,15 @@ class ViewMenuMapping:
     'connectus.submissions.views.view_submissions': 'view_course_',
   }
 
+  class_submenu_mapping = {
+    'connectus.courses.views.attendance': 'view_attendance',
+    'connectus.courses.views.grades': 'view_grades',
+    'connectus.courses.views.view_own_grades': 'view_own_grades',
+    'connectus.courses.views.view_seating_plan': 'view_seating_plan',
+    'connectus.submissions.views.view_uploaded': 'view_gradeables',
+    'connectus.submissions.views.view_submissions': 'view_submissions',
+  }
+
 class Util:
   @staticmethod
   def construct_module_name(function):

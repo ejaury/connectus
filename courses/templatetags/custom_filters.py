@@ -11,7 +11,7 @@ def basename(value):
 
 @register.filter(name='get_value')
 def get_value(value, key):
-  return value.get(key)
+  return value.get(key, '')
 
 @register.filter(name='get_attr')
 def get_attr(value, arg):

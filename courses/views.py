@@ -5,14 +5,16 @@ import re
 from copy import deepcopy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, resolve
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from connectus.app_helper.helper import DateForm, NavigationTree
+from connectus.app_helper.helper import DateForm, NavigationTree, Util, \
+                                        ViewMenuMapping
 from connectus.courses.models import Course, CourseRegistration, Attendance
 from connectus.grades.models import Grade, Gradeable, GradeForm
 from connectus.user_info.models import UserProfile
+from urlparse import urlparse
 
 def index(req):
   all_courses = Course.objects.all().order_by('-id')
@@ -23,12 +25,21 @@ def index(req):
 @login_required
 def detail(req, course_id):
   default_url = req.GET.get('url')
+  default_selected_id = "view_grades"
   if not default_url:
     default_url = reverse('connectus.courses.views.grades',
                           args=[course_id])
     if __is_in_group(req.user, 'Student'):
       default_url = reverse('connectus.courses.views.view_own_grades',
                             args=[course_id])
+
+  try:
+    view_func, args, kwargs = resolve(default_url)
+    view_name = Util.construct_module_name(view_func)
+    selected_cls_menu_id = \
+      ViewMenuMapping.class_submenu_mapping.get(view_name, default_selected_id)
+  except:
+    selected_cls_menu_id = default_selected_id 
 
   course = Course.objects.get(id=course_id)
   #TODO: change default by passing view name through GET param
@@ -38,6 +49,7 @@ def detail(req, course_id):
                               'course_title': course.title,
                               'default_url': default_url,
                               'permitted_actions': permitted_actions,
+                              'selected_cls_menu_id': selected_cls_menu_id,
                             },
                             context_instance=RequestContext(req))
 

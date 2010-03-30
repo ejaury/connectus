@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load custom_filters %}
 
 {% block ajax %}
   <script type="text/javascript">
@@ -38,6 +39,17 @@
 
     }
 
+    var selection_wrapper = function(remove_selector, this_element_id) {
+      jQuery(function($) {
+        /* remove all selection first */
+        $(remove_selector).removeClass("selected");
+        /* then enable selection for this element */
+        $(this_element_id).addClass("selected");
+      });
+
+      return enable_sorting();
+    };
+
     function ajax_submit(url) {
       $.post(url);
     }
@@ -52,41 +64,46 @@
       // Default action
       $(function() {
         $("#content_main").html(ajax_load).load(
-          '{{ default_url }}', enable_sorting);
+          '{{ default_url }}',
+          selection_wrapper(parent_selector, "#{{ selected_cls_menu_id }}")
+        );
       });
 
-      $("#thumb_view").click(function(){
-        $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.view_seating_plan course_id %}', enable_sorting);
-      });
-      $("#detail_view").click(function(){
-        $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.grades course_id %}', enable_sorting);
-      });
+      var parent_selector = "#content_nav_sublinks li";
 
       $("#view_attendance").click(function(){
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.attendance course_id %}', enable_sorting);
+          '{% url connectus.courses.views.attendance course_id %}',
+          selection_wrapper(parent_selector, "#view_attendance")
+        );
       });
 
       $("#view_grades").click(function(){
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.grades course_id %}', enable_sorting);
+          '{% url connectus.courses.views.grades course_id %}',
+          selection_wrapper(parent_selector, "#view_grades")
+        );
       });
 
       $("#view_own_grades").click(function(){
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.view_own_grades course_id %}', enable_sorting);
+          '{% url connectus.courses.views.view_own_grades course_id %}',
+          selection_wrapper(parent_selector, "#view_own_grades")
+        );
       });
 
       $("#view_gradeables").click(function(){
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.submissions.views.view_uploaded course_id %}', enable_sorting);
+          '{% url connectus.submissions.views.view_uploaded course_id %}',
+          selection_wrapper(parent_selector, "#view_gradeables")
+        );
       });
 
       $("#view_seating_plan").click(function(){
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.courses.views.view_seating_plan course_id %}', enable_sorting);
+          '{% url connectus.courses.views.view_seating_plan course_id %}',
+          selection_wrapper(parent_selector, "#view_seating_plan")
+        );
       });
 
       $("#view_submissions").click(function(){
@@ -100,6 +117,7 @@
           },
           success: function(response, text_status, xhr) {
             $('#content_main').html(response);
+            selection_wrapper(parent_selector, "#view_submissions");
           }
         });
       });

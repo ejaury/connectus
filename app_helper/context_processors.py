@@ -32,13 +32,12 @@ def sidebar(request):
   }
 
 def navigation_view_solver(request):
-  selected_css_class = 'selected'
   view_func, args, kwargs = resolve(request.path)
   view_name = Util.construct_module_name(view_func)
-  selected_id = ViewMenuMapping.mapping.get(view_name)
+  selected_id = ViewMenuMapping.mapping.get(view_name, '')
   if kwargs:
     if len(kwargs) == 1:
       selected_id += kwargs.values()[0]
   return {
-    'selected_id': selected_id
+    'selected_id': selected_id,
   }
