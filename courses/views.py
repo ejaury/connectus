@@ -18,9 +18,9 @@ from urlparse import urlparse
 
 @login_required
 def index(req):
-  if __is_in_group(req.user, 'Teacher'):
-    all_courses = Course.objects.all().order_by('-id')
-  elif __is_in_group(req.user, 'Student'):
+  # Default is teacher
+  all_courses = Course.objects.all().order_by('-id')
+  if __is_in_group(req.user, 'Student'):
     registered_courses = \
       CourseRegistration.objects.filter(student__id=req.user.id)
     course_ids = []
