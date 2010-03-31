@@ -15,10 +15,38 @@ class NavigationTree():
       'icon_path': 'home.png',
       'url': '/',
     }),
+    ('Inbox', {
+      'id': 'sidebar_inbox',
+      'icon_path': 'mail.png',
+      'url': '/messages',
+    }),
     ('Classes', {
       'id': 'sidebar_class',
       'icon_path': 'class.png',
       'url': '/courses',
+    }),
+    ('Calendar', {
+      'id': 'sidebar_calendar',
+      'icon_path': 'calendar.png',
+      'url': '/schedule/view',
+    })
+  )
+
+  parent_main_navi = (
+    ('Home', {
+      'id': 'sidebar_home',
+      'icon_path': 'home.png',
+      'url': '/',
+    }),
+    ('Inbox', {
+      'id': 'sidebar_inbox',
+      'icon_path': 'mail.png',
+      'url': '/messages',
+    }),
+    ('Child\'s Progress', {
+      'id': 'sidebar_stats',
+      'icon_path': 'stats.png',
+      'url': '/stats',
     }),
     ('Calendar', {
       'id': 'sidebar_calendar',
@@ -68,6 +96,8 @@ class NavigationTree():
         return NavigationTree.main_navi
       elif group[0].name == 'Student':
         return NavigationTree.main_navi
+      elif group[0].name == 'Parent':
+        return NavigationTree.parent_main_navi
     else:
       return None
 
@@ -89,6 +119,9 @@ class ViewMenuMapping:
     'connectus.main.views.index': 'sidebar_home',
     'connectus.courses.views.index': 'sidebar_class',
     'connectus.schedule.views.view': 'sidebar_calendar',
+    'connectus.messaging.views.view_message': 'sidebar_inbox',
+    'connectus.messaging.views.inbox': 'sidebar_inbox',
+    'connectus.messaging.views.new': 'sidebar_inbox',
     'connectus.courses.views.detail': 'view_course_',
     'connectus.courses.views.attendance': 'view_course_',
     'connectus.courses.views.grades': 'view_course_',

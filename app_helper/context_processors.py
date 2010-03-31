@@ -35,7 +35,7 @@ def navigation_view_solver(request):
   view_func, args, kwargs = resolve(request.path)
   view_name = Util.construct_module_name(view_func)
   selected_id = ViewMenuMapping.mapping.get(view_name, '')
-  if kwargs:
+  if kwargs and selected_id.endswith('_'):
     if len(kwargs) == 1:
       selected_id += kwargs.values()[0]
   return {

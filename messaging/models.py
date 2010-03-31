@@ -23,12 +23,11 @@ class Messaging(models.Model):
 class MessageForm(ModelForm):
   class Meta:
     model = Messaging
-    exclude = 'read'
+    exclude = ['read', 'sender']
 
   def __init__(self, *args, **kwargs):
     super(ModelForm, self).__init__(*args, **kwargs)
     # add CSS class for client-side validation
     self.fields['to'].widget.attrs['class'] = 'validate[required]'
-    self.fields['sender'].widget.attrs['class'] = 'validate[required]'
     self.fields['course'].widget.attrs['class'] = 'validate[required]'
     self.fields['subject'].widget.attrs['class'] = 'validate[required]'

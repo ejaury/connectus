@@ -16,13 +16,16 @@ def inbox(req):
 
 @login_required
 def view_message(req, msg_id):
-  msg = get_object_or_404(Messaging, pk=msg_id) 
-  msg.read = True
-  msg.save()
-  return render_to_response('messaging/view_message.html', {
-                              'msg': msg,
-                            },
-                            context_instance=RequestContext(req))
+  msg = Messaging.objects.get(id=msg_id, to=req.user.id)
+  if msg:
+    msg.read = True
+    msg.save()
+    return render_to_response('messaging/view_message.html', {
+                                'msg': msg,
+                              },
+                              context_instance=RequestContext(req))
+  else:
+    return HttpResponseRedirect('/messages/')
 
 @login_required
 def new(req):
@@ -30,7 +33,9 @@ def new(req):
     form = MessageForm(req.POST)
     # TODO: Validate form better here
     if form.is_valid():
-      form.save()
+      msg = form.save(commit=False)
+      msg.sender = req.user
+      msg.save()
       return HttpResponseRedirect('/messages/')
   else:
     form = MessageForm()
