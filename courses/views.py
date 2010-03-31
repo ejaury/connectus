@@ -16,8 +16,18 @@ from connectus.grades.models import Grade, Gradeable, GradeForm
 from connectus.user_info.models import UserProfile
 from urlparse import urlparse
 
+@login_required
 def index(req):
-  all_courses = Course.objects.all().order_by('-id')
+  if __is_in_group(req.user, 'Teacher'):
+    all_courses = Course.objects.all().order_by('-id')
+  elif __is_in_group(req.user, 'Student'):
+    registered_courses = \
+      CourseRegistration.objects.filter(student__id=req.user.id)
+    course_ids = []
+    for reg in registered_courses:
+      course_ids.append(reg.course.id) 
+    all_courses = Course.objects.filter(id__in=course_ids)
+    
   return render_to_response('courses/index.html',
                             { 'all_courses': all_courses },
                             context_instance=RequestContext(req))
@@ -112,7 +122,6 @@ def view_own_grades(req, course_id):
     if groups and groups[0].name == 'Student':
       grades = Grade.objects.filter(gradeable__course__id=course_id,
                                     student__id=req.user.id) 
-      print grades
       return render_to_response('courses/view_own_grades.html', {
                                   'course_id': course_id,
                                   'course_title': course.title,
