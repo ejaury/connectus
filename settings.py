@@ -87,6 +87,7 @@ INSTALLED_APPS = (
     'connectus.user_info',
     'connectus.schedule',
     'connectus.submissions',
+    'connectus.messaging',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

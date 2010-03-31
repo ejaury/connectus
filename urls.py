@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name':'main/index.html'}),
     (r'^courses/', include('connectus.courses.urls')),
     (r'^grades/', include('connectus.grades.urls')),
+    (r'^messages/', include('connectus.messaging.urls')),
     (r'^schedule/', include('connectus.schedule.urls')),
     (r'^admin/', include(admin.site.urls)),
     # TODO: this conf is for production only
