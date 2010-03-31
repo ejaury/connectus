@@ -10,3 +10,12 @@ class UserProfile(models.Model):
 
   def __unicode__(self):
     return '%s %s' % (self.user.first_name, self.user.last_name)
+
+class ParentStudentRelation(models.Model):
+  parent = models.ForeignKey(User, related_name="parent")
+  student = models.ForeignKey(User, unique=True, related_name="children")
+
+  def __unicode__(self):
+    return '%s %s - %s %s' % (self.parent.first_name, self.parent.last_name, \
+                              self.student.first_name, self.student.last_name)
+
