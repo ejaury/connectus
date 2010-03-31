@@ -199,48 +199,48 @@
         <li id="tb_login">Login</li>
       </ul-->
     <!--/div-->
-    <div id="h_toolbar">
-      <ul>
-        <li alt="Go back to Home">
-          <a href="/"><img src="/site_media/css/images/home.png" width="15" height="15">Home</img></a>
+  </div>
+  <div id="h_toolbar">
+    <ul>
+      <li alt="Go back to Home">
+        <a href="/"><img src="/site_media/css/images/home.png" width="15" height="15">Home</img></a>
+      </li>
+    </ul>
+    <span class="jx-separator-left"></span>
+    <ul>
+      <li style="padding: 2px 8px;">
+        <input class="default-value" type="textfield" value="Search..." style="font-family: Verdana; font-size: 11px;"></input>
+      </li>
+    </ul>
+    <span class="jx-separator-left"></span>
+    {% if not user.is_anonymous %}
+      <ul class="jx-bar-button-left">
+        <li>
+          <i>
+          Welcome, 
+            {% if user.first_name and user.last_name %}
+              <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
+            {% else %}
+              <strong>{{ user.username }}</strong>!
+            {% endif %}
+          </i>
         </li>
       </ul>
-      <span class="jx-separator-left"></span>
-      <ul>
-        <li style="padding: 2px 8px;">
-          <input class="default-value" type="textfield" value="Search..." style="font-family: Verdana; font-size: 11px;"></input>
-        </li>
-      </ul>
-      <span class="jx-separator-left"></span>
-      {% if not user.is_anonymous %}
-        <ul class="jx-bar-button-left">
-          <li>
-            <i>
-            Welcome, 
-              {% if user.first_name and user.last_name %}
-                <strong>{{ user.first_name }} {{ user.last_name }}</strong>!
-              {% else %}
-                <strong>{{ user.username }}</strong>!
-              {% endif %}
-            </i>
-          </li>
-        </ul>
-      {% endif %}
-      <ul class="jx-bar-button-right">
-        <li alt="Login/Logout from your account">
-          {% if not user.is_anonymous %}
-            <a href="/accounts/logout"><strong>Logout</strong></a>
-          {% else %}
-            <a href="/accounts/login">Login</a>
-          {% endif %}
-        </li>
-      </ul>
-      <span class="jx-separator-right"></span>
-      <ul class="jx-bar-button-right">
-        <li alt="Check for message notification">Notification</li>
-      </ul>
-      <span class="jx-separator-right"></span>
-    </div>
+    {% endif %}
+    <ul class="jx-bar-button-right">
+      <li alt="Login/Logout from your account">
+        {% if not user.is_anonymous %}
+          <a href="/accounts/logout"><strong>Logout</strong></a>
+        {% else %}
+          <a href="/accounts/login">Login</a>
+        {% endif %}
+      </li>
+    </ul>
+    <span class="jx-separator-right"></span>
+    <ul class="jx-bar-button-right">
+      <li alt="Check for message notification">Notification</li>
+    </ul>
+    <span class="jx-separator-right"></span>
   </div>
 </body>
 </html>

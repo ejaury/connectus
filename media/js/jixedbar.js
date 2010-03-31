@@ -16,7 +16,7 @@
 	$.fn.jixedbar = function(options) {
 		var constants = {
 				constOverflow: "hidden",
-				constPosition: "absolute",
+				constPosition: "fixed",
 				constBottom: "0px"
 			};
 		var defaults = {
@@ -35,7 +35,7 @@
 			var centerScreen = (fullScreen/2)*(1); // get screen center
 			
 			// set html and body style for jixedbar to work
-			$("html").css({"overflow" : "hidden", "height" : "100%"});
+			$("html").css({"height" : "100%"});
 			$("body").css({"margin": "0px", "overflow": "auto", "height": "100%"});
 
 			// initialize bar
@@ -62,8 +62,18 @@
 			}
 
 			// calculate and adjust bar to center
+      // This causes toolbar to shift left, when HTML overflow is visible
+      /*
 			marginLeft = centerScreen-($(this).width()/2);
 			$(this).css({'margin-left': marginLeft});
+      */
+      // Temporary fix:
+      var marginLeft = ($(window).width() - $(this).width())/2;
+      if (marginLeft < 0 ) {
+        marginLeft = 0;
+      }
+			$(this).css({'margin-left': marginLeft});
+        
 			
 			// fix image vertical alignment and border
 			$("img", obj).css({
