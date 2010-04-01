@@ -129,6 +129,7 @@ class ViewMenuMapping:
     'connectus.courses.views.view_seating_plan': 'view_course_',
     'connectus.submissions.views.view_uploaded': 'view_course_',
     'connectus.submissions.views.view_submissions': 'view_course_',
+    'connectus.stats.views.index': 'sidebar_stats',
   }
 
   class_submenu_mapping = {

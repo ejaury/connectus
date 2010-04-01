@@ -4,6 +4,6 @@
 {% endblock %}
 
 {% block content %}
-  <h2>Calendar</h2>
+  <h2>{{ cal_user.first_name }} {{ cal_user.last_name }}'s Schedule</h2>
   {{ cal_html|safe }}
 {% endblock %}

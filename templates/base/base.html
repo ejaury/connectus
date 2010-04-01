@@ -250,10 +250,14 @@
       </li>
     </ul>
     <span class="jx-separator-right"></span>
-    <ul class="jx-bar-button-right">
-      <li alt="Check for message notification">Notification</li>
-    </ul>
-    <span class="jx-separator-right"></span>
+    {% if not user.is_anonymous %}
+      <ul class="jx-bar-button-right">
+        <li alt="Check for message notification">
+          <a href="/messages"><img src="/site_media/css/images/mail.png" width="15" height="15">Notification</a>
+        </li>
+      </ul>
+      <span class="jx-separator-right"></span>
+    {% endif %}
   </div>
 </body>
 </html>
