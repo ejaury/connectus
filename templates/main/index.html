@@ -7,12 +7,13 @@
 <!-- TODO: Use different icons for diff class -->
 <div id="class_list">
   {% for course in courses %}
-  <div id="{{ course.title|slugify }}" class="class_thumb">
-    <a href="{% url connectus.courses.views.detail course.id %}">
-      <img alt="{{ course.title }}" src="/site_media/css/images/{{ course.icon_path }}"/>
-      <p>{{ course.title }}</p>
-    </a>
-  </div>
+    <div id="{{ course.title|slugify }}" class="class_thumb">
+      <a href="{% url connectus.courses.views.detail course.id %}">
+        <img alt="{{ course.title }}" src="/site_media/css/images/{{ course.icon_path }}"/>
+        <p>{{ course.title }}</p>
+      </a>
+    </div>
+  {% empty %}
   {% endfor %}
 </div>
 {% endblock %}

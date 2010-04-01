@@ -1,0 +1,33 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+  <h2>Inbox</h2>
+  <a href="/messages/new/" class="button">
+    New Message 
+  </a>
+
+  <table id="inbox" border=1>
+    {% for message in messages %}
+      <tr>
+        <td>{{ message.sender }}</td>
+        <td>
+          <a href="/messages/{{ message.id }}/">
+            {{ message.subject }}
+          </a>
+        </td>
+        <td>{{ message.created_at }}</td>
+        <td>
+          <a href="/messages/{{ message.id }}/make_unread/" class="button">
+            Mark Unread
+          </a>
+        </td>
+        <td>
+          <a href="javascript:confirm_delete('/messages/{{ message.id }}/delete/')"
+             class="button">
+            Delete
+          </a>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

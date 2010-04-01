@@ -19,6 +19,8 @@ class Grade(models.Model):
   score = models.FloatField()
   gradeable = models.ForeignKey(Gradeable)
   student = models.ForeignKey(User)
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
 
   def __unicode__(self):
     return '%s %s - %s' % (self.student.first_name,

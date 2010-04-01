@@ -54,6 +54,20 @@ table.course {
   padding: 0;
 }
 
+#flash_messages {
+  padding: 10px;
+}
+
+#flash_messages .error {
+  color: red;
+  font-weight: bold;
+}
+
+#flash_messages .info {
+  color: green;
+  font-style: italic;
+}
+
 #page-container {
   /* center this div */
   margin: auto;
@@ -163,6 +177,12 @@ table.course {
 
 #header #user_info li:hover a {
   color: white;
+}
+
+table#inbox {
+  border: black solid 1px; 
+  margin 0 auto;
+  width: 100%;
 }
 
 #mid-wrapper {

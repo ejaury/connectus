@@ -20,7 +20,7 @@ from urlparse import urlparse
 def index(req):
   # Default is teacher
   all_courses = Course.objects.all().order_by('-id')
-  if __is_in_group(req.user, 'Student'):
+  if Util.is_in_group(req.user, 'Student'):
     registered_courses = \
       CourseRegistration.objects.filter(student__id=req.user.id)
     course_ids = []
@@ -39,7 +39,7 @@ def detail(req, course_id):
   if not default_url:
     default_url = reverse('connectus.courses.views.grades',
                           args=[course_id])
-    if __is_in_group(req.user, 'Student'):
+    if Util.is_in_group(req.user, 'Student'):
       default_url = reverse('connectus.courses.views.view_own_grades',
                             args=[course_id])
 
@@ -278,10 +278,6 @@ def update_seating_order(req, course_id):
       course.save()
 
     return HttpResponse()
-
-def __is_in_group(user, group_name):
-  group = Group.objects.get(name=group_name)
-  return group in user.groups.all()
 
 def __user_tuple_compare(a, b):
   x = '%s %s' % (a[0].first_name, a[0].last_name)

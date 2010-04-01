@@ -1,4 +1,5 @@
 from django import forms 
+from django.contrib.auth.models import Group
 
 class DateForm(forms.Form):
   date = forms.DateField()
@@ -150,3 +151,8 @@ class Util:
       function = function.view_func
       name = '%s.%s' % (function.__module__, function.func_name)
     return name
+
+  @staticmethod
+  def is_in_group(user, group_name):
+    group = Group.objects.get(name=group_name)
+    return group in user.groups.all()

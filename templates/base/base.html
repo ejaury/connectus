@@ -175,7 +175,20 @@
           </ul>
         </div>
 
+
         <div id="content-wrapper">
+          <div id="flash_messages">
+            <div class="info">
+              {% if request.session.info_msg %}
+                {{ request.session.info_msg }}
+              {% endif %}
+            </div>
+            <div class="error">
+              {% if request.session.error_msg %}
+                {{ request.session.error_msg }}
+              {% endif %}
+            </div>
+          </div>
           {% block content_header %}
           {% endblock %}
           {% block content-nav %}

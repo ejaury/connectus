@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+  <!--[if IE]><script language="javascript" type="text/javascript" src="/site_media/js/jqplot/excanvas.js"></script><![endif]-->
+  <script type="text/javascript" src="/site_media/js/jqplot/jquery.jqplot.js"></script>
+  <script type="text/javascript" src="/site_media/js/jqplot/plugins/barRenderer.js"></script>
+  <script type="text/javascript" src="/site_media/js/jqplot/plugins/dateAxisRenderer.js"></script>
+  <script type="text/javascript" src="/site_media/js/jqplot/plugins/categoryAxisRenderer.js"></script>
+  <script type="text/javascript" src="/site_media/js/jqplot/plugins/canvasTextRenderer.js"></script>
+  <script type="text/javascript" src="/site_media/js/jqplot/plugins/canvasAxisTickRenderer.js"></script>
+  <script type="text/javascript" src="/site_media/js/jqplot/plugins/highlighter.js"></script>
+  <link rel="stylesheet" type="text/css" href="/site_media/css/jquery.jqplot.css" />
+  
+  <script type="text/javascript">
+    $(document).ready(function() {
+      {% for cls_name,data in grades_by_class.items %}
+      var grades_str = "{{ data.grades|safe }}";
+      var grades = eval( "(" + grades_str + ")" );
+      var cls_avg_str = "{{ data.avg|safe }}";
+      var cls_avg = eval( "(" + cls_avg_str + ")" );
+      var labels_str = '{{ data.labels|safe }}';
+      var labels = eval( "(" + labels_str + ")" );
+      //var class_average = [100.0, 304.5, 200.4, 140.0];
+      //var ticks = ['asdf', 'asdf', 'asfd', 'ddddd']; 
+      $.jqplot('chartdiv_{{ forloop.counter }}', [grades, cls_avg], {
+        title: '{{ cls_name|safe }}',
+        series: [
+          {
+            label:"{{ student.first_name }}'s Grades",
+            renderer: $.jqplot.BarRenderer
+          }, 
+          {
+            label: "Class Average"
+          },
+        ],
+        legend:{show:true},
+        axes: {
+          xaxis:{ticks:labels, renderer:$.jqplot.CategoryAxisRenderer},
+          yaxis:{tickOptions:{formatString:'%.2f'}}
+        },
+        highlighter: { sizeAdjust: 7.5 }
+      });
+      {% endfor %}
+    });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h2>{{ student.first_name }} {{ student.last_name }}'s Progress</h2>
+  <br/>
+  {% for i in grades_by_class %}
+    <div id="chartdiv_{{ forloop.counter }}" style="height:400px;width:700px; "></div>
+    <br/><br/>
+  {% endfor %}
+{% endblock %}

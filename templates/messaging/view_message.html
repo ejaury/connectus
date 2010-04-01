@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+  <h2>{{ msg.subject }}</h2>
+  <table id="message">
+    <tr>
+      <td>From:</td>
+      <td>{{ msg.sender.first_name }} {{ msg.sender.last_name }}</td>
+    </tr>
+    <tr>
+      <td>To:</td>
+      <td>{{ msg.to.first_name }} {{ msg.to.last_name }}</td>
+    </tr>
+    <tr>
+      <td>Date:</td>
+      <td>{{ msg.created_at }}</td>
+    </tr>
+  </table>
+  <p>{{ msg.message }}</p>
+{% endblock %}

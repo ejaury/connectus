@@ -1,0 +1,21 @@
+{% extends "base/base.html" %}
+
+{% block head %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#validated_form").validationEngine();
+    });
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h3>Compose New Message</h3>
+
+  <form id="validated_form" action="/messages/new/" method="post">
+    <table>
+      {{ form.as_table }}
+    </table>
+  <input type="submit" value="Send" />
+  </form>
+{% endblock %}
+
