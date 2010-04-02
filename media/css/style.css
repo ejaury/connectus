@@ -179,6 +179,40 @@ table.course {
   color: white;
 }
 
+#login {
+  background-color: #99CCFF;
+  margin: auto;
+  top: 20%;
+  width: 350px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+
+#login_form {
+  padding: 10px;
+}
+
+#login_form input {
+  font-size: large;
+}
+
+#login_form table {
+  color: #004477;
+  font-size: large;
+}
+
+#login_form table input {
+  font-size: x-large;
+  width: 220px;
+}
+
+#login_form .errorlist {
+  color: red;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 table#inbox {
   border: black solid 1px; 
   margin 0 auto;

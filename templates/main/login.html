@@ -1,8 +1,21 @@
 {% extends "base/base.html" %}
 
+{% block head %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#sidebar").remove();
+      $("#content-wrapper").css({ 'margin-left':'0' });
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
-  <form action="{{ request.path }}" method="post">
-    {{ form.as_p }}
-    <input type="submit" value="Login" />
-  </form>
+  <div id="login">
+    <form id="login_form" action="{{ request.path }}" method="post">
+      <table>
+        {{ form.as_table }}
+      </table>
+      <input class="button" type="submit" value="Login" />
+    </form>
+  </div>
 {% endblock %}
