@@ -42,7 +42,6 @@
       $("#h_toolbar").jixedbar({
         roundedCorners: true
       });
-
     });
   </script>
 
@@ -147,6 +146,11 @@
                   <img src="/site_media/css/images/{{ menu.1.icon_path }}" width="25" height="25">
                   {{ menu.0 }}
                   </img>
+                  {% ifnotequal unread_msg 0 %}
+                    {% ifequal menu.0 "Inbox" %}
+                      <div id="unread">[ {{ unread_msg }} ]</div>
+                    {% endifequal %}
+                  {% endifnotequal %}
                 </a>
               </li>
               
@@ -252,8 +256,12 @@
     <span class="jx-separator-right"></span>
     {% if not user.is_anonymous %}
       <ul class="jx-bar-button-right">
-        <li alt="Check for message notification">
-          <a href="/messages"><img src="/site_media/css/images/mail.png" width="15" height="15">Notification</a>
+        <li id="notification" alt="Check for message notification">
+          <a href="/messages"><img src="/site_media/css/images/mail.png" width="15" height="15">Notification
+          {% ifnotequal unread_msg 0 %}
+            [ {{ unread_msg }} ]
+          {% endifnotequal %}
+          </a>
         </li>
       </ul>
       <span class="jx-separator-right"></span>

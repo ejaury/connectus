@@ -454,6 +454,12 @@ table#inbox {
   cursor: pointer;
 }
 
+#unread {
+  color: red;
+  display: inline;
+  padding: 0 5px;
+}
+
 span#tb_search {
   float: left;
   font-size: 10pt;

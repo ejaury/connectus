@@ -1,5 +1,6 @@
 from django import forms 
 from django.contrib.auth.models import Group
+from connectus.messaging.models import Messaging
 
 class DateForm(forms.Form):
   date = forms.DateField()
@@ -92,13 +93,16 @@ class NavigationTree():
 
   @staticmethod
   def get_main_navi(group):
+    nav_tree = None
     if group:
       if group[0].name == 'Teacher':
-        return NavigationTree.main_navi
+        nav_tree = NavigationTree.main_navi
       elif group[0].name == 'Student':
-        return NavigationTree.main_navi
+        nav_tree = NavigationTree.main_navi
       elif group[0].name == 'Parent':
-        return NavigationTree.parent_main_navi
+        nav_tree = NavigationTree.parent_main_navi
+
+      return nav_tree
     else:
       return None
 
@@ -111,6 +115,7 @@ class NavigationTree():
         return NavigationTree.teacher_class_detail
     else:
       return None
+
 
 class ViewMenuMapping:
   # available options in main menu
@@ -152,6 +157,10 @@ class Util:
       function = function.view_func
       name = '%s.%s' % (function.__module__, function.func_name)
     return name
+
+  @staticmethod
+  def get_num_unread_msg(user):
+    return Messaging.objects.filter(to=user, read=False).count()
 
   @staticmethod
   def is_in_group(user, group_name):

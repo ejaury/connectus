@@ -12,6 +12,9 @@ def sidebar(request):
     menus = NavigationTree.get_main_navi(user_groups)
   else:
     return {} 
+
+  # check inbox
+  unread_msg = Util.get_num_unread_msg(request.user)
   
   #TODO need a better way to check for groups
   if user_groups[0].name == 'Teacher': 
@@ -28,7 +31,8 @@ def sidebar(request):
 
   return {
     'courses': courses,
-    'menus': menus
+    'menus': menus,
+    'unread_msg': unread_msg,
   }
 
 def navigation_view_solver(request):
