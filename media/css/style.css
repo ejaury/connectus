@@ -20,6 +20,18 @@ h1 {
   padding: 0;
 }
 
+h2 {
+  color: #444444;
+  font-size: 20pt;
+  margin: 0;
+  padding: 0;
+}
+
+h3 {
+  color: #0066BB;
+  font-size: 15pt;
+}
+
 a img {
   border: none;
   vertical-align: middle;
@@ -33,10 +45,6 @@ table.course {
 
 .hidden {
   display: none;
-}
-
-#add_action {
-  float: right;
 }
 
 #bg_container {
@@ -214,9 +222,16 @@ table.course {
 }
 
 table#inbox {
-  border: black solid 1px; 
   margin 0 auto;
   width: 100%;
+}
+
+table#inbox .unread {
+  font-weight: bold;
+}
+
+table a  {
+  color: #006699;
 }
 
 #mid-wrapper {
@@ -352,10 +367,10 @@ table#inbox {
 #content_nav_sublinks li:hover,
 #content_nav_sublinks li.selected {
   background-color: #DBF1FF;
-  border-bottom: #DBF1FF solid 2px;
+  border-bottom: #006699 solid 3px;
   color: #0068A8;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
 }
 
 #content_nav_sublinks .content_nav_sublinks {
@@ -397,6 +412,7 @@ table#inbox {
   clear: both;
   font-size: 9pt;
   color: lightgray;
+  margin-bottom: 30px;
   padding: 10px 0 0 10px;
   line-height: 18px;
   height: 30px;
@@ -453,6 +469,33 @@ table#inbox {
 #content #content_main {
   line-height: 18px;
   padding: 10px;
+}
+
+#content_main form {
+  background-color: #99CCFF;
+  color: #004477;
+  font-size: 13pt;
+  line-height: 2em;
+  margin: auto;
+  padding: 15px;
+  text-align: left;
+  width: 500px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+
+#content_main form input {
+  font-size: 13pt;
+  width: 400px;
+}
+
+#content_main form input.submit {
+  margin: 10px 0;
+  width: auto;
+}
+
+#content_main form textarea {
+  width: 400px;
 }
 
 #content-nav .padding {

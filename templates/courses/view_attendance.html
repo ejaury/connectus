@@ -1,33 +1,46 @@
 {% block content %}
-  {% if not update %}
-    <form id="change_date_form" action="/courses/{{ course_id }}/attendance/" method="post">
-      <label for="id_date">Go to Date:</label>
-      <input type="text" id="id_date" name="date">
-    </form>
-  {% endif %}
+  <h3>Attendance</h3>
 
-  <div id="attendance">
-    <h3>{{ date }}</h3>
-    <table id="t_attendance" class="display">
-      <thead>
-        <tr>
-          <th>Student Name</th>
-          <th>Attended Class?</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for att in attendance %} 
-        <tr>
-          <td>{{ att.0.first_name }} {{ att.0.student.last_name }}</td>
-          {% if att.1 %}
-            <td style="color: green">Yes</td>
-          {% else %}
-            <td style="color: red">No</td>
-          {% endif %}
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  {% if attendance %}
+    {% if not update %}
+      <form id="change_date_form" action="/courses/{{ course_id }}/attendance/" method="post">
+        <label for="id_date">Go to Date:</label>
+        <input type="text" id="id_date" name="date">
+      </form>
+    {% endif %}
+
+    <div id="attendance">
+      <h3 style="clear: both; margin: 0; padding: 10px 0; text-align: center;">{{ date }}</h3>
+      <table id="t_attendance" class="display">
+        <thead>
+          <tr>
+            <th>Student Name</th>
+            <th>Attended Class?</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for att in attendance %} 
+          <tr>
+            <td>{{ att.0.first_name }} {{ att.0.student.last_name }}</td>
+            {% if att.1 %}
+              <td style="color: green">
+                <center>
+                  <img src="/site_media/css/images/check.png" alt="Yes" width="15" height="15"/>
+                </center>
+              </td>
+            {% else %}
+              <td style="color: red">
+                <center>
+                  <img src="/site_media/css/images/cross.png" alt="No" width="15" height="15"/>
+                </center>
+              </td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No students are registered in this class</p>
+    {% endif %}
   </div>
-  
 {% endblock %}

@@ -1,7 +1,33 @@
 {% load custom_filters %}
 
+{% block head %}
+  <script type="text/javascript">
+    /* 
+       TODO: May not be the most efficient way.
+             Should ignore td hover.
+    */
+    var oTable;
+
+    $(document).ready(function() {
+      $('#uploaded_asgn tbody td').hover( function() {
+        var iCol = $('td').index(this) % 3;
+        var nTrs = oTable.fnGetNodes();
+        $('td:nth-child('+(iCol+1)+')', nTrs).addClass( 'highlighted' );
+      }, function() {
+        var nTrs = oTable.fnGetNodes();
+        $('td.highlighted', nTrs).removeClass('highlighted');
+      } );
+      
+      oTable = $('#uploaded_asgn').dataTable( {
+        "bSortClasses": false,
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
-  <table id="uploaded_asgn" border="1">
+  <h3>Uploaded Assignments</h3>
+  <table id="uploaded_asgn" class="display">
     <thead>
       <tr>
         <th>Gradeable Name</th>
@@ -21,11 +47,4 @@
       {% endfor %}
     </tbody>
   </table>
-  <!--form method="post" action="/courses/{{ course_id }}/gradeables/uploaded/edit/">
-      <table>
-          {{ formset }}
-      </table>
-      <input type="button" value="Submit" 
-             onClick="ajax_submit('/courses/{{ course_id }}/gradeables/uploaded/edit/')"/>
-  </form-->
 {% endblock %}

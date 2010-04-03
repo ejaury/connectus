@@ -36,6 +36,9 @@
           $("#change_date_form").submit();
         }
       });
+
+      /* Remove all form validation error msg */
+      $("div.formError").remove();
     };
 
     var selection_wrapper = function(remove_selector, this_element_id) {
@@ -149,10 +152,10 @@
   <div id="content-nav">
     <div id="content_nav_sublinks">
       <ul>
-      {% for action_title,action in permitted_actions.items %}
-        <li id="{{ action.id }}" class="content_nav_sublinks">
-          <img src="/site_media/css/images/{{ action.icon_path }}" alt="{{ action_title }}" width="30" height="30"/>
-          <p>{{ action_title }}</p>
+      {% for action in permitted_actions %}
+        <li id="{{ action.1.id }}" class="content_nav_sublinks">
+          <img src="/site_media/css/images/{{ action.1.icon_path }}" alt="{{ action.0 }}" width="30" height="30"/>
+          <p>{{ action.0 }}</p>
         </li>
       {% endfor %}
       </ul>

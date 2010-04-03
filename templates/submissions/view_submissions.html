@@ -1,8 +1,34 @@
 {% load custom_filters %}
 
+{% block head %}
+  <script type="text/javascript">
+    /* 
+       TODO: May not be the most efficient way.
+             Should ignore td hover.
+    */
+    var oTable;
+
+    $(document).ready(function() {
+      $('#submissions tbody td').hover( function() {
+        var iCol = $('td').index(this) % 3;
+        var nTrs = oTable.fnGetNodes();
+        $('td:nth-child('+(iCol+1)+')', nTrs).addClass( 'highlighted' );
+      }, function() {
+        var nTrs = oTable.fnGetNodes();
+        $('td.highlighted', nTrs).removeClass('highlighted');
+      } );
+      
+      oTable = $('#submissions').dataTable( {
+        "bSortClasses": false,
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
+  <h3>My Submissions</h3>
   {% if submissions %}
-    <table id="submissions" border="1">
+    <table id="submissions" class="display">
       <thead>
         <tr>
           <th>Gradeable Name</th>

@@ -1,21 +1,77 @@
 {% extends "base/base.html" %}
 
+{% block head %}
+  <script type="text/javascript">
+    /* 
+       TODO: May not be the most efficient way.
+             Should ignore td hover.
+    */
+    var oTable;
+
+    $(document).ready(function() {
+      $('#inbox tbody td').hover( function() {
+        var iCol = $('td').index(this) % 5;
+        var nTrs = oTable.fnGetNodes();
+        $('td:nth-child('+(iCol+1)+')', nTrs).addClass( 'highlighted' );
+      }, function() {
+        var nTrs = oTable.fnGetNodes();
+        $('td.highlighted', nTrs).removeClass('highlighted');
+      } );
+      
+      oTable = $('#inbox').dataTable( {
+        "bSortClasses": false,
+        "aaSorting": [[2,"desc"]],
+        "aoColumns": [
+          null,
+          null,
+          null,
+          { "bSortable": false },
+          { "bSortable": false }
+        ]
+      });
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
   <h2>Inbox</h2>
   <a href="/messages/new/" class="button">
     New Message 
   </a>
 
-  <table id="inbox" border=1>
-    {% for message in messages %}
+  <table id="inbox" class="display" border="0">
+    <thead>
       <tr>
-        <td>{{ message.sender }}</td>
+        <th>From</th>
+        <th>Subject</th>
+        <th>Date Received</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for message in messages %}
+      <tr
+        {% if not message.read %}
+          class="unread">
+        {% else %}
+          >
+        {% endif %}
+        <td>
+          <a href="/messages/{{ message.id }}/">
+            {{ message.sender.first_name }} {{ message.sender.last_name }}
+          </a>
+        </td>
         <td>
           <a href="/messages/{{ message.id }}/">
             {{ message.subject }}
           </a>
         </td>
-        <td>{{ message.created_at }}</td>
+        <td>
+          <a href="/messages/{{ message.id }}/">
+            {{ message.created_at }}
+          </a>
+        </td>
         <td>
           <a href="/messages/{{ message.id }}/make_unread/" class="button">
             Mark Unread
@@ -29,5 +85,6 @@
         </td>
       </tr>
     {% endfor %}
+  </tbody>
   </table>
 {% endblock %}

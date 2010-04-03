@@ -32,15 +32,17 @@
 {% endblock %}
 
 {% block content %}
-  <div id="add_action">
-    <a href="#" class="button">
-      <img src="/site_media/css/images/add.png" width="20" height="20">
-        Add new
-      </img>
-    </a>
-  </div>
+  <h3>Grades</h3>
 
   {% if all_gradeables %}
+    <div id="add_action">
+      <a href="#" class="button">
+        <img src="/site_media/css/images/add.png" width="20" height="20">
+          Add new
+        </img>
+      </a>
+    </div>
+
     <table id="grades" class="display">
       <thead>
         <tr>
@@ -64,7 +66,7 @@
                 {% if grade.id %}
                   <a href="javascript:confirm_delete('/grades/{{ grade.id }}/delete/')">
                     <center>
-                    <img src="/site_media/css/images/delete.png" alt="Delete" width="15" height="15"></img>
+                    <img src="/site_media/css/images/cross.png" alt="Delete" width="15" height="15"></img>
                     </center>
                   </a>
                 {% endif %}
@@ -77,6 +79,6 @@
       </tbody>
     </table>
   {% else %}
-      <p>No grades are available.</p>
+      <p>No students are registered in this class.</p>
   {% endif %}
 {% endblock %}

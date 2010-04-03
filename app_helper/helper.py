@@ -57,39 +57,39 @@ class NavigationTree():
     })
   )
 
-  teacher_class_detail = {
-    'Attendance': {
+  teacher_class_detail = (
+    ('Attendance', {
       'id': 'view_attendance',
       'icon_path': 'attendance.png',
-    },
-    'Grades': {
+    }),
+    ('Grades', {
       'id': 'view_grades',
       'icon_path': 'grades.png',
-    },
-    'Gradeables': {
+    }),
+    ('Uploaded Assignments', {
       'id': 'view_gradeables',
       'icon_path': 'gradeables.png',
-    },
-    'Seating Plan': {
+    }),
+    ('Seating Plan', {
       'id': 'view_seating_plan',
       'icon_path': 'seating_plan.png',
-    },
-    'Submissions': {
+    }),
+    ('Submissions', {
       'id': 'view_submissions',
       'icon_path': 'submissions.png',
-    },
-  }
+    }),
+  )
 
-  student_class_detail = {
-    'Grades': {
+  student_class_detail = (
+    ('Grades', {
       'id': 'view_own_grades',
       'icon_path': 'grades.png',
-    },
-    'Submissions': {
+    }),
+    ('Submissions', {
       'id': 'view_submissions',
       'icon_path': 'submissions.png',
-    },
-  }
+    }),
+  )
 
   @staticmethod
   def get_main_navi(group):
