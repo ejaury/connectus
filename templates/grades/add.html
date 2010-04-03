@@ -9,7 +9,7 @@
 {% block content %}
   <h3>Add New Grade</h3>
 
-  <form id="validated_form" action="/grades/add/" method="post">
+  <form id="validated_form" class="form" action="/grades/{{ course_id }}/add/" method="post">
     <table>
       {{ form.as_table }}
     </table>

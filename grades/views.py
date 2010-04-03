@@ -12,10 +12,12 @@ def index(req):
                             {'all_grades': all_grades},
                             context_instance=RequestContext(req))
 
-def add(req):
+def add(req, course_id):
+  course = Course.objects.get(id=course_id)
   if req.method == 'POST':
-    form = GradeForm(req.POST)
+    form = GradeForm(req.POST, course=course)
     # TODO: Validate form better here
+    #       Should check if grade already exists for a given student
     if form.is_valid():
       form.save()
       # assuming we're coming from a course page
@@ -24,10 +26,12 @@ def add(req):
       redirect_url = referer + '?url=%sgrades/' % path
       return HttpResponseRedirect(redirect_url)
   else:
-    form = GradeForm()
+    form = GradeForm(course=course)
 
-  return render_to_response('grades/add.html',
-                            { 'form': form  },
+  return render_to_response('grades/add.html', {
+                              'course_id': course_id,
+                              'form': form,
+                            },
                             context_instance=RequestContext(req))
 
 def edit(req, grade_id):

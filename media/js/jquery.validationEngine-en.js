@@ -36,6 +36,9 @@
 					"onlyNumber":{
 						"regex":"/^[0-9\ ]+$/",
 						"alertText":"* Numbers only"},	
+          "floatOnly":{
+            "regex":"/^[0-9]*\.?[0-9]+$/",
+						"alertText":"* Integer or decimal number only"},	
 					"noSpecialCaracters":{
 						"regex":"/^[0-9a-zA-Z]+$/",
 						"alertText":"* No special caracters allowed"},	

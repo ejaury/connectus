@@ -73,15 +73,19 @@
           </a>
         </td>
         <td>
-          <a href="/messages/{{ message.id }}/make_unread/" class="button">
-            Mark Unread
-          </a>
+          <center>
+            <a href="/messages/{{ message.id }}/make_unread/" class="button">
+              Mark Unread
+            </a>
+          </center>
         </td>
         <td>
-          <a href="javascript:confirm_delete('/messages/{{ message.id }}/delete/')"
-             class="button">
-            Delete
-          </a>
+          <center>
+            <a href="javascript:confirm_delete('/messages/{{ message.id }}/delete/')"
+               class="button">
+              Delete
+            </a>
+          </center>
         </td>
       </tr>
     {% endfor %}

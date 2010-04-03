@@ -25,7 +25,7 @@
 
       $("#add_action").click(function(){
         $("#content_main").html(ajax_load).load(
-          '{% url connectus.grades.views.add %}', enable_sorting);
+          '{% url connectus.grades.views.add course_id %}', enable_sorting);
       });
     } );
   </script>

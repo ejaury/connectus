@@ -11,12 +11,12 @@
 {% endblock %}
 
 {% block content %}
-  <div id="login">
-    <form id="login_form" action="{{ request.path }}" method="post">
-      <table>
-        {{ form.as_table }}
-      </table>
-      <input class="submit" type="submit" value="Login" />
-    </form>
+  <div id="logout" class="message">
+    <p>Successfully logged out.</p>
+    <p>To access your Connectus page again, please
+      <a href="/accounts/login">click here</a>
+      to login
+    </p>
   </div>
 {% endblock %}
+
