@@ -12,6 +12,7 @@
 
 {% block content %}
   <div id="login">
+    <h3 style="border-bottom: gray solid 1px; padding: 15px 0 5px; margin: 10px;">Login to Connectus</h3>
     <form id="login_form" action="{{ request.path }}" method="post">
       <table>
         {{ form.as_table }}

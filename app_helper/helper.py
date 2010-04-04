@@ -146,6 +146,18 @@ class ViewMenuMapping:
     'connectus.submissions.views.view_submissions': 'view_submissions',
   }
 
+class Constants:
+  # hack: shouldn't be contaminating view with hardcoded html 
+  check_mark = "<center>" + \
+                  "<img src='/site_media/css/images/check.png' alt='Yes' " + \
+                       "width='15' height='15'/>" + \
+                "</center>"
+
+  cross_mark = "<center>" + \
+                  "<img src='/site_media/css/images/cross.png' alt='No' " + \
+                       "width='15' height='15'/>" + \
+                "</center>"
+
 class Util:
   @staticmethod
   def construct_module_name(function):

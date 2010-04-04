@@ -15,7 +15,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     (r'^$', 'connectus.courses.views.index'),
     (r'^(?P<course_id>\d+)/$', 'connectus.courses.views.detail'),
-    (r'^(?P<course_id>\d+)/attendance/$', 'connectus.courses.views.attendance'),
     (r'^(?P<course_id>\d+)/grades/$', 'connectus.courses.views.grades'),
     (r'^(?P<course_id>\d+)/grades/update$', 'connectus.courses.views.update_grades'),
     (r'^(?P<course_id>\d+)/view_seating_plan/$', 'connectus.courses.views.view_seating_plan'),
@@ -23,6 +22,13 @@ urlpatterns = patterns('',
       'connectus.courses.views.view_own_grades'),
     (r'^(?P<course_id>\d+)/update_seating_order$',
       'connectus.courses.views.update_seating_order'),
+
+    #
+    # Attendance
+    #
+    (r'^(?P<course_id>\d+)/attendance/$', 'connectus.courses.views.attendance'),
+    (r'^(?P<course_id>\d+)/attendance/update$',
+      'connectus.courses.views.update_attendance'),
 
     #
     # File uploads/Assignment submissions

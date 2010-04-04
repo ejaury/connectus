@@ -1,6 +1,37 @@
-{% block content %}
-  <h3>Attendance</h3>
+{% block head %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      /* Construct custom editable element for Checkbox tag */
+      $.editable.addInputType('checkbox', {
+        element : function(settings, original) {
+          var input = $('<input type="checkbox">');
+          $(this).append(input);
+          return(input);
+        },
+        content : function(string, settings, original) {
+          var checked = $(original).attr('value') == "yes" ? 1 : 0;
+          var input = $(':input:first', this);
+          $(input).attr("checked", checked);
+        }, 
+        submit: function(settings, original) {
+          var input = $(':input:first', this);
+          var value = $(input).attr('checked') ? 1 : 0;
+          $(input).val(value);
+        }
+      });
+ 
+      $('.inline_checkbox').editable('/courses/{{ course_id }}/attendance/update', {
+           type      : 'checkbox',
+           cancel    : 'Cancel',
+           submit    : 'OK',
+           indicator : 'Saving...',
+           tooltip   : 'Click to edit...'
+       });
+    });
+  </script>
+{% endblock %}
 
+{% block content %}
   {% if attendance %}
     {% if not update %}
       <form id="change_date_form" class="form" action="/courses/{{ course_id }}/attendance/" method="post">
@@ -23,13 +54,14 @@
           <tr>
             <td>{{ att.0.first_name }} {{ att.0.student.last_name }}</td>
             {% if att.1 %}
-              <td style="color: green">
+              <td id="{{ date_simple }}_{{ att.0.id }}" class="inline_checkbox" value="yes" style="color: green">
                 <center>
                   <img src="/site_media/css/images/check.png" alt="Yes" width="15" height="15"/>
                 </center>
               </td>
             {% else %}
-              <td style="color: red">
+              <td id="{{ date_simple }}_{{ att.0.id }}" class="inline_checkbox"
+                  value="no" style="color: red">
                 <center>
                   <img src="/site_media/css/images/cross.png" alt="No" width="15" height="15"/>
                 </center>

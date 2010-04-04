@@ -6,11 +6,11 @@ from copy import deepcopy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
 from django.core.urlresolvers import reverse, resolve
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
 from connectus.app_helper.helper import DateForm, NavigationTree, Util, \
-                                        ViewMenuMapping
+                                        ViewMenuMapping, Constants
 from connectus.courses.models import Course, CourseRegistration, Attendance
 from connectus.grades.models import Grade, Gradeable, GradeForm
 from connectus.user_info.models import UserProfile
@@ -206,7 +206,6 @@ def view_seating_plan(req, course_id):
                               context_instance=RequestContext(req))
 
 def attendance(req, course_id):
-  print req.method
   if req.is_ajax():
     form = DateForm()
     update = False
@@ -237,10 +236,36 @@ def attendance(req, course_id):
                                 'course_id': course_id,
                                 'course_title': Course.objects.get(id=course_id).title,
                                 'date': date.strftime("%A, %B %d, %Y"),
+                                'date_simple': date.strftime("%Y-%m-%d"),
                                 'form': form,
                                 'update': update,
                               },
                               context_instance=RequestContext(req))
+
+def update_attendance(req, course_id):
+  if req.method == 'POST':
+    ids = req.POST['id'].split('_')
+    attended = int(req.POST['value'])
+    date_str = ids[0]
+    student_id = ids[1]
+    date = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+    att_info = Attendance.objects.filter(student__id=student_id, date=date)
+    if attended:
+      response = Constants.check_mark
+      if not att_info:
+        att_info = Attendance(course=Course.objects.get(id=course_id),
+                         student=User.objects.get(id=student_id),
+                         date=date)
+        att_info.save()
+    else:
+      response = Constants.cross_mark
+      if att_info:
+        att_info[0].delete()
+
+    redirect_url = '/courses/%s/?url=/courses/%s/attendance/' % \
+                   (course_id, course_id)
+
+    return HttpResponse(response) 
 
 def update_grades(req, course_id):
   if req.method == 'POST':
