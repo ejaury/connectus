@@ -640,6 +640,7 @@ ul.announcement .date {
 ul.announcement .title {
   border-bottom: #006699 dotted 1px;
   color: #006699;
+  font-size: 13pt;
   font-weight: bold;
   margin: 10px;
 }
