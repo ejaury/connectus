@@ -3,11 +3,22 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from connectus.app_helper.helper import LoginForm
+from connectus.app_helper.helper import LoginForm, Util
+from connectus.user_info.models import ParentStudentRelation
 
 @login_required
 def index(req):
-  return render_to_response('main/index.html',
+  children = None
+  if Util.is_in_group(req.user, 'Parent'):
+    relations = ParentStudentRelation.objects.filter(parent=req.user).\
+                                              order_by('student')
+    children = []
+    for rel in relations:
+      children.append(rel.student)
+    
+  return render_to_response('main/index.html', {
+                              'children': children,
+                            },
                             context_instance=RequestContext(req))
 
 def login_user(request):

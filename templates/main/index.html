@@ -16,5 +16,19 @@
   {% empty %}
   {% endfor %}
 </div>
+{% if children %}
+  <h3>Monitor your children's progress:</h3>
+  {% for child in children %}
+    <div id="{{ child.username }}" class="class_thumb">
+      <a href="{% url connectus.stats.views.index %}">
+        <img alt="{{ child.first_name }} {{ child.last_name }}"
+             src="/site_media/images/users/{{ child.get_profile.image_path }}"/>
+        <p>{{ child.first_name }} {{ child.last_name }}</p>
+      </a>
+    </div>
+  {% empty %}
+    You have no children registered in this school
+  {% endfor %}
+{% endif %}
 {% endblock %}
 

@@ -1,3 +1,12 @@
+{% block head %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("#content-wrapper").css("min-height", "1000px");
+      $("#mid-wrapper").css("min-height", "1000px");
+    });
+  </script>
+{% endblock %}
+
 {% block content %}
   <h3>Seating Plan</h3>
   <div id="teacher_table_box">

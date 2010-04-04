@@ -238,7 +238,7 @@ table a  {
 
 #mid-wrapper {
   background: #333333;
-  min-height: 960px;
+  min-height: 350px;
 } 
 
 #sidebar {
@@ -330,7 +330,7 @@ table a  {
 #content-wrapper {
   background: white;
   margin-left: 220px;
-  min-height: 960px;
+  min-height: 350px;
 }
 
 #content_header h2 {
@@ -418,6 +418,10 @@ table a  {
   padding: 10px 0 0 10px;
   line-height: 18px;
   height: 30px;
+  -webkit-box-shadow: 0 2px 5px #999;
+  -moz-box-shadow: 0 2px 5px #999;
+  -webkit-border-radius: 0 0 5px 5px;
+  -moz-border-radius: 0 0 5px 5px;
 } 
 
 #teacher_table_box {
