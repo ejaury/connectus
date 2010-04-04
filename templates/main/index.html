@@ -1,5 +1,16 @@
 {% extends "base/base.html" %}
 
+{% block head %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      /*
+      var ajax_load = "<img src='/site_media/css/images/loading_small.gif' alt='loading...' />";
+      $("#announcement_block").html(ajax_load).load("/messages/announcements/");
+      */
+    });
+  </script>
+{% endblock %}
+
 
 {% block content %}
 <h2>Welcome to Connectus!</h2>
@@ -30,5 +41,32 @@
     You have no children registered in this school
   {% endfor %}
 {% endif %}
+
+  <div id="announcement_block">
+  <h2>News and Announcements</h2>
+
+  <ul id="announcements" class="announcement">
+    {% for announcement in announcements %}
+    <li class="{% cycle 'odd' 'even' %}">
+      <div id="ann_date" class="date">
+        <p>{{ announcement.created_at }}</p>
+      </div>
+      <div id="ann_title" class="title">
+        <p style="padding: 0 0 5px;">{{ announcement.course.title }}: {{ announcement.title }}</p>
+      </div>
+      <div id="ann_author" class="author">
+        <img src="/site_media/images/users/{{ announcement.author.get_profile.image_path }}"
+             alt="{{ announcement.author.first_name }} {{ announcement.author.last_name }}"/>
+        <p>{{ announcement.author.first_name }} {{ announcement.author.last_name }}</p>
+      </div>
+      <div id="ann_content" class="content">
+        <p style="padding: 0 0 5px;">{{ announcement.message }}</p>
+      </div>
+    </li>
+    {% empty %}
+      <p>There are no announcements at the moment</p>
+    {% endfor %}
+  </ul>
+  </div>
 {% endblock %}
 

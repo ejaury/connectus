@@ -51,6 +51,11 @@ table.course {
   display: none;
 }
 
+#announcement_block {
+  clear: both;
+  margin-top: 30px;
+}
+
 #bg_container {
   background:  url("/site_media/css/images/bg_shadow.png") repeat-y;
   margin: auto;
@@ -272,6 +277,8 @@ table a  {
   margin: 8px 0 0;
   padding: 0 10px;
   text-shadow: 2px 2px 3px #222222;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   -webkit-box-shadow: 1px 1px 3px #777777;
   -moz-box-shadow: 1px 1px 3px #777777;
 }
@@ -290,8 +297,8 @@ table a  {
 #sidebar li.selected {
   background-color: #0088DD;
   border: none;
-  -webkit-border-radius: 0 10px 10px 0;
-  -moz-border-radius: 0 10px 10px 0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
 }
 
 #sidebar li.selected a {
@@ -589,6 +596,74 @@ span#tb_login {
   width: 500px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+}
+
+ul.announcement {
+  list-style-type: none;
+  margin: 20px auto;
+  padding: 0;
+  width: 100%;
+}
+
+ul.announcement li {
+  margin: 0 0 10px;
+  min-height: 150px;
+}
+
+ul.announcement li.odd {
+  background-color: #DDEEFF;
+  border: #EEE solid 1px;
+}
+
+ul.announcement li.even {
+  background-color: #DFD;
+  border: #EEE solid 1px;
+}
+
+ul.announcement .content {
+  color: #333;
+  margin: 10px; 
+}
+
+ul.announcement .content p {
+  width: 550px;
+}
+
+ul.announcement .date {
+  float: right;
+  font-size: 10pt;
+  margin: 10px;
+  text-align: right;
+  width: 150px;
+}
+
+ul.announcement .title {
+  border-bottom: #006699 dotted 1px;
+  color: #006699;
+  font-weight: bold;
+  margin: 10px;
+}
+
+ul.announcement .title p {
+  margin: 5px;
+  width: 550px;
+}
+
+ul.announcement .author {
+  color: #006699;
+  clear: both;
+  float: right;
+  text-align: center;
+  width: 150px;
+}
+
+ul.announcement .author img {
+  height: 75px;
+  width: 75px;
+}
+
+ul.announcement .author p {
+  font-size: 10pt;
 }
 
 /*

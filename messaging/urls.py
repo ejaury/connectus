@@ -18,5 +18,6 @@ urlpatterns = patterns('',
     (r'^(?P<msg_id>\d+)/$', 'connectus.messaging.views.view_message'),
     (r'^(?P<msg_id>\d+)/make_unread/$', 'connectus.messaging.views.make_unread'),
     (r'^(?P<msg_id>\d+)/delete/$', 'connectus.messaging.views.delete'),
+    (r'^announcements/$', 'connectus.messaging.views.view_announcements'),
     #(r'^admin/', include(admin.site.urls)),
 )

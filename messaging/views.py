@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render_to_response
 from django.template import RequestContext
-from connectus.messaging.models import Messaging, MessageForm
+from connectus.app_helper.helper import Util
+from connectus.courses.models import CourseRegistration
+from connectus.messaging.models import Announcement, Messaging, MessageForm
+from connectus.user_info.models import ParentStudentRelation
 
 @login_required
 def inbox(req):
@@ -57,3 +60,23 @@ def make_unread(req, msg_id):
   msg.read = False
   msg.save()
   return HttpResponseRedirect('/messages')
+
+@login_required
+def view_announcements(req):
+  student = req.user
+  if Util.is_in_group(req.user, 'Parent'):
+    relations = ParentStudentRelation.objects.filter(parent=req.user)
+    if relations:
+      #TODO: should be querying for all children
+      student = relations[0].student
+  registrations = CourseRegistration.objects.filter(student=student)
+  course_ids = []
+  for reg in registrations:
+    course_ids.append(reg.course.id)
+  announcements = Announcement.objects.filter(course__id__in=course_ids).\
+                                       order_by('-created_at') 
+
+  return render_to_response('messaging/view_announcements.html', {
+                              'announcements': announcements,
+                            },
+                            context_instance=RequestContext(req))

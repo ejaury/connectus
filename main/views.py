@@ -4,6 +4,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from connectus.app_helper.helper import LoginForm, Util
+from connectus.courses.models import CourseRegistration
+from connectus.messaging.models import Announcement
 from connectus.user_info.models import ParentStudentRelation
 
 @login_required
@@ -15,8 +17,10 @@ def index(req):
     children = []
     for rel in relations:
       children.append(rel.student)
-    
+
+  announcements = _get_announcements(req.user)
   return render_to_response('main/index.html', {
+                              'announcements': announcements,
                               'children': children,
                             },
                             context_instance=RequestContext(req))
@@ -48,3 +52,19 @@ def login_user(request):
   return render_to_response('main/login.html',
                             { 'form': form },
                             context_instance=RequestContext(request))
+
+def _get_announcements(user):
+  student = user
+  if Util.is_in_group(user, 'Parent'):
+    relations = ParentStudentRelation.objects.filter(parent=user)
+    if relations:
+      #TODO: should be querying for all children
+      student = relations[0].student
+  registrations = CourseRegistration.objects.filter(student=student)
+  course_ids = []
+  for reg in registrations:
+    course_ids.append(reg.course.id)
+  announcements = Announcement.objects.filter(course__id__in=course_ids).\
+                                       order_by('-created_at') 
+  return announcements
+

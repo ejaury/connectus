@@ -3,6 +3,17 @@ from django.db import models
 from django.forms import ModelForm
 from connectus.courses.models import Course
 
+class Announcement(models.Model):
+  author = models.ForeignKey(User)
+  course = models.ForeignKey(Course)
+  message = models.TextField(blank=True, null=True)
+  title = models.CharField(max_length=100)
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
+
+  def __unicode__(self):
+    return "%s: %s" % (self.course.title, self.title)
+
 # Rough model of messaging system
 class Messaging(models.Model):
   course = models.ForeignKey(Course)

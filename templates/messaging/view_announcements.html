@@ -1,0 +1,62 @@
+{% block head %}
+  <script type="text/javascript">
+    /* 
+       TODO: May not be the most efficient way.
+             Should ignore td hover.
+    */
+    var oTable;
+
+    /*
+    $(document).ready(function() {
+      $('#inbox tbody td').hover( function() {
+        var iCol = $('td').index(this) % 5;
+        var nTrs = oTable.fnGetNodes();
+        $('td:nth-child('+(iCol+1)+')', nTrs).addClass( 'highlighted' );
+      }, function() {
+        var nTrs = oTable.fnGetNodes();
+        $('td.highlighted', nTrs).removeClass('highlighted');
+      } );
+      
+      oTable = $('#inbox').dataTable( {
+        "bSortClasses": false,
+        "aaSorting": [[2,"desc"]],
+        "aoColumns": [
+          null,
+          null,
+          null,
+          { "bSortable": false },
+          { "bSortable": false }
+        ]
+      });
+    });
+    */
+  </script>
+{% endblock %}
+
+{% block content %}
+  <h2>News and Announcements</h2>
+
+  <ul id="announcements" class="announcement">
+    {% for announcement in announcements %}
+    <li class="{% cycle 'odd' 'even' %}">
+      <div id="ann_date" class="date">
+        <p>{{ announcement.created_at }}</p>
+      </div>
+      <div id="ann_title" class="title">
+        <p style="padding: 0 0 5px;">{{ announcement.course.title }}: {{ announcement.title }}</p>
+      </div>
+      <div id="ann_author" class="author">
+        <img src="/site_media/images/users/{{ announcement.author.get_profile.image_path }}"
+             alt="{{ announcement.author.first_name }} {{ announcement.author.last_name }}"/>
+        <p>{{ announcement.author.first_name }} {{ announcement.author.last_name }}</p>
+      </div>
+      <div id="ann_content" class="content">
+        <p style="padding: 0 0 5px;">{{ announcement.message }}</p>
+      </div>
+    </li>
+    {% empty %}
+      <p>There are no announcements at the moment</p>
+    {% endfor %}
+  </ul>
+{% endblock %}
+
