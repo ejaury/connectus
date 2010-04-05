@@ -2,6 +2,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       /* Construct custom editable element for Checkbox tag */
+      /*
       $.editable.addInputType('checkbox', {
         element : function(settings, original) {
           var input = $('<input type="checkbox">');
@@ -27,6 +28,20 @@
            indicator : 'Saving...',
            tooltip   : 'Click to edit...'
        });
+       */
+
+      /* Enable attendance toggling */
+      $('.inline_checkbox').click(function() {
+        var this_el = $(this);
+        var post_data = {
+          "id": $(this).attr("id")
+        }
+        $.post('/courses/{{ course_id }}/attendance/update',
+               post_data,
+               function(data) {
+          $(this_el).html(data); 
+        });
+      });
     });
   </script>
 {% endblock %}

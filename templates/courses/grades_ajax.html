@@ -23,7 +23,7 @@
       /* Add action */
       var ajax_load = "<img src='/site_media/css/images/loading.gif' alt='loading...' />";
 
-      $("#add_action").click(function(){
+      $("#add_action a").click(function(){
         $("#content_main").html(ajax_load).load(
           '{% url connectus.grades.views.add course_id %}', enable_sorting);
       });

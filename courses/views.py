@@ -245,22 +245,20 @@ def attendance(req, course_id):
 def update_attendance(req, course_id):
   if req.method == 'POST':
     ids = req.POST['id'].split('_')
-    attended = int(req.POST['value'])
     date_str = ids[0]
     student_id = ids[1]
     date = datetime.datetime.strptime(date_str, '%Y-%m-%d')
     att_info = Attendance.objects.filter(student__id=student_id, date=date)
-    if attended:
-      response = Constants.check_mark
-      if not att_info:
-        att_info = Attendance(course=Course.objects.get(id=course_id),
-                         student=User.objects.get(id=student_id),
-                         date=date)
-        att_info.save()
-    else:
+    # toogle attendance info
+    if att_info:
       response = Constants.cross_mark
-      if att_info:
-        att_info[0].delete()
+      att_info[0].delete()
+    else:
+      response = Constants.check_mark
+      att_info = Attendance(course=Course.objects.get(id=course_id),
+                       student=User.objects.get(id=student_id),
+                       date=date)
+      att_info.save()
 
     redirect_url = '/courses/%s/?url=/courses/%s/attendance/' % \
                    (course_id, course_id)

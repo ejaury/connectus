@@ -670,6 +670,10 @@ ul.announcement .author p {
   font-size: 10pt;
 }
 
+.inline_checkbox img {
+  cursor: pointer;
+}
+
 /*
 #toolbar ul {
   bottom: 0;
