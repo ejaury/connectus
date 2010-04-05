@@ -143,6 +143,14 @@ table.course {
   width: 960px;
 }
 
+#header #logo a:hover {
+  border: none;
+}
+
+#header #logo img.logo {
+  padding-top: 5px;
+}
+
 #header_userinfo {
   float: right;
 }
@@ -443,11 +451,6 @@ table a  {
 #teacher_table_box span {
   color: #aa5500;
   line-height: 25px;
-}
-
-#header .logo {
-  float: right;
-  margin-top: 40px;
 }
 
 #class_list a {

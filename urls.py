@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     (r'^grades/', include('connectus.grades.urls')),
     (r'^messages/', include('connectus.messaging.urls')),
     (r'^schedule/', include('connectus.schedule.urls')),
-    (r'^stats/', include('connectus.stats.urls')),
+    (r'^statistics/', include('connectus.stats.urls')),
     (r'^admin/', include(admin.site.urls)),
     # TODO: this conf is for production only
     (r'^site_media/(?P<path>.*)$', 'django.views.static.serve', {

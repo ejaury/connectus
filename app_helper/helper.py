@@ -48,7 +48,7 @@ class NavigationTree():
     ('Child\'s Progress', {
       'id': 'sidebar_stats',
       'icon_path': 'stats.png',
-      'url': '/stats',
+      'url': '/statistics',
     }),
     ('Calendar', {
       'id': 'sidebar_calendar',
