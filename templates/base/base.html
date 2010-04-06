@@ -120,6 +120,7 @@
   </div>
   <div id="header_bottom">
     <div id="header_menu">
+      {% if not user.is_anonymous %}
       <ul>
         {% for path in tree_path %}
           {% ifnotequal forloop.counter 1 %}
@@ -130,6 +131,7 @@
           </li>
         {% endfor %}
       </ul>
+      {% endif %}
     </div>
   </div>
   <div id="static-nav"></div>

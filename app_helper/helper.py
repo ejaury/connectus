@@ -34,7 +34,7 @@ class NavigationTree():
     ]),
     NavTreeNode('Inbox', 'connectus.messaging.views.inbox'),
     NavTreeNode('Calendar', 'connectus.schedule.views.view'),
-    NavTreeNode("Child's Progress", 'connectus.stats.views.indek'),
+    NavTreeNode("Child's Progress", 'connectus.stats.views.index'),
   ])
 
   main_navi = (
