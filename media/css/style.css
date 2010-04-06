@@ -111,16 +111,20 @@ table.course {
   background-color: #505050;
   color: white;
   font-size: large;
-  height: 50px;
+  height: 40px;
 }
 
-#header_menu {
+#header_bottom #header_menu {
   background: #006699;
-  height: 50px;
   margin: auto;
+  min-height: 40px;
   width: 960px;
   -webkit-border-radius: 5px 5px 0 0;
   -moz-border-radius: 5px 5px 0 0;
+}
+
+#header_menu a {
+  color: white;
 }
 
 #header_menu ul {

@@ -121,11 +121,14 @@
   <div id="header_bottom">
     <div id="header_menu">
       <ul>
-        <li>Home</li>
-        <li>>></li>
-        <li>Classes</li>
-        <li>>></li>
-        <li>Math 1</li>
+        {% for path in tree_path %}
+          {% ifnotequal forloop.counter 1 %}
+            <li>>></li>
+          {% endifnotequal %}
+          <li>
+            <a href="{{ path.1 }}">{{ path.0 }}</a>
+          </li>
+        {% endfor %}
       </ul>
     </div>
   </div>

@@ -9,8 +9,34 @@ class LoginForm(forms.Form):
   username = forms.CharField(max_length=30)
   password = forms.CharField(widget=forms.PasswordInput(render_value=False))
 
+class NavTreeNode():
+  def __init__(self, name, view_name, children=None):
+    self.name = name
+    self.view_name = view_name 
+    self.children = children
+
+  def __repr__(self):
+    return '%s: %s' % (self.name, self.view_name)
+
 # Hardcoded navigation tree - this should've been in DB
 class NavigationTree():
+  main_node_tree = NavTreeNode('Home', 'connectus.main.views.index', [
+    NavTreeNode('Classes', 'connectus.courses.views.index', [
+      NavTreeNode('', 'connectus.courses.views.detail', [
+        NavTreeNode('Attendance', 'connectus.courses.views.attendance'),
+        NavTreeNode('Grades', 'connectus.courses.views.grades'),
+        NavTreeNode('Seating Plan', 'connectus.courses.views.view_seating_plan'),
+        NavTreeNode('Uploaded Assignments', \
+                    'connectus.submissions.views.view_uploaded'),
+        NavTreeNode('Students Submissions', \
+                    'connectus.submissions.views.view_submissions'),
+      ])
+    ]),
+    NavTreeNode('Inbox', 'connectus.messaging.views.inbox'),
+    NavTreeNode('Calendar', 'connectus.schedule.views.view'),
+    NavTreeNode("Child's Progress", 'connectus.stats.views.indek'),
+  ])
+
   main_navi = (
     ('Home', {
       'id': 'sidebar_home',
@@ -116,6 +142,27 @@ class NavigationTree():
     else:
       return None
 
+  @staticmethod
+  def get_nav_tree_path(view_name):
+    return NavigationTree.traverse(NavigationTree.main_node_tree, view_name)
+     
+  @staticmethod
+  def traverse(node, view_name, stack=None):
+    if not stack:
+      stack = []
+    stack.append(node)
+    print "Current path: "
+    print stack
+    if node.view_name == view_name:
+      return stack
+    if node.children:
+      for child in node.children:
+        found = NavigationTree.traverse(child, view_name, stack)
+        if found:
+          return stack 
+        else:
+          stack.pop()
+    return None 
 
 class ViewMenuMapping:
   # available options in main menu
